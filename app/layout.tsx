@@ -5,13 +5,14 @@ export const metadata: Metadata = {
   title: "HitHappen",
   description: "Scopri eventi e serate vicino a te, incontra persone e scegli cosa fare a Milano e Monza Brianza.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  other: { "codex-preview": "development" },
 };
 
 export const viewport: Viewport = {
   colorScheme: "light dark",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fff8e9" },
-    { media: "(prefers-color-scheme: dark)", color: "#1d1213" },
+    { media: "(prefers-color-scheme: light)", color: "#F3E7D3" },
+    { media: "(prefers-color-scheme: dark)", color: "#17120F" },
   ],
 };
 

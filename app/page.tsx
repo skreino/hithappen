@@ -88,7 +88,7 @@ function EventCard({
   return (
     <article className={`event-card accent-${event.accent}`}>
       <button className="event-visual" onClick={onOpen} aria-label={`Apri ${event.title}`}>
-        <img src={event.image} alt={`${event.title} presso ${event.venue}`} width="1024" height="800" loading="lazy" decoding="async" /><span className="event-shade" />
+        <img className="event-photo-treatment" src={event.image} alt={`${event.title} presso ${event.venue}`} width="1024" height="800" loading="lazy" decoding="async" /><span className="event-shade" />
         <span className="date-badge">{dateParts[0]}<strong>{dateParts[1]}</strong>{dateParts[2]}</span>
         <span className="price-badge">{event.price}</span>
         <span className="distance-badge"><MapPin size={13} /> {event.distance}</span>
@@ -162,8 +162,8 @@ export default function HomePage() {
         <BrandMark />
         <div className="context-copy">
           <span className="eyebrow">MILANO + MONZA BRIANZA</span>
-          <h1>Esci.<br /><em>Succede.</em></h1>
-          <p>Eventi vicini, persone reali e meno tempo perso a decidere cosa fare.</p>
+          <h1>La guida<br /><em>delle serate.</em></h1>
+          <p>Una guida tascabile contemporanea per trovare concerti, aperitivi e notti da ricordare.</p>
         </div>
         <div className="context-note"><Sparkles size={18} /><span>Prototipo interattivo · dati dimostrativi</span></div>
       </aside>
@@ -180,7 +180,7 @@ export default function HomePage() {
         <div className="app-scroll" id="app-content" tabIndex={-1}>
           {view === "home" && <>
             <section className="feed-intro">
-              <div><span className="kicker">Mercoledì, 26 agosto</span><h2>Cosa succede<br /><em>intorno a te</em></h2></div>
+              <div><span className="kicker">Mercoledì, 26 agosto</span><h2>Cosa succede<br /><em>stasera?</em></h2></div>
               <button className="search-button" aria-label="Cerca"><Search size={21} /></button>
             </section>
             <div className="filter-row scrollbar-none" aria-label="Filtra gli eventi">
@@ -212,7 +212,7 @@ export default function HomePage() {
             <div className="swipe-game">
               <div className="game-label"><span><Gamepad2 size={15} /> SERATA SWIPE</span><small>{gameIndex + 1} / {events.length}</small></div>
               <div className={`swipe-card ${gameDecision ? `decision-${gameDecision}` : ""}`}>
-                <img src={events[gameIndex].image} alt={`${events[gameIndex].title} presso ${events[gameIndex].venue}`} width="1024" height="1124" loading="lazy" decoding="async" />
+                <img className="event-photo-treatment" src={events[gameIndex].image} alt={`${events[gameIndex].title} presso ${events[gameIndex].venue}`} width="1024" height="1124" loading="lazy" decoding="async" />
                 <span className="event-shade" />
                 {gameDecision === "like" && <strong className="decision-stamp like-stamp">SALVATA</strong>}
                 {gameDecision === "skip" && <strong className="decision-stamp skip-stamp">PASSO</strong>}
@@ -248,7 +248,7 @@ export default function HomePage() {
           {view === "map" && <section className="map-view">
             <div className="map-toolbar">
               <button className="map-search"><Search size={17} /><span>Cerca in questa zona</span></button>
-              <button className="map-filter"><Sparkles size={17} /></button>
+              <button className="map-filter" aria-label="Filtra gli eventi sulla mappa"><Sparkles size={17} /></button>
             </div>
             <div className="map-canvas">
               <svg className="map-lines" viewBox="0 0 520 720" preserveAspectRatio="none" aria-hidden="true">
@@ -283,7 +283,7 @@ export default function HomePage() {
               <div className="map-card-row scrollbar-none">
                 {events.map((event) => (
                   <button className="map-event-card" key={event.id} onClick={() => setSelected(event)}>
-                    <img src={event.image} alt={`${event.title} presso ${event.venue}`} width="176" height="156" loading="lazy" decoding="async" />
+                    <img className="event-photo-treatment" src={event.image} alt={`${event.title} presso ${event.venue}`} width="176" height="156" loading="lazy" decoding="async" />
                     <span><small>{event.date} · {event.distance}</small><strong>{event.title}</strong><b>{event.price}</b></span>
                   </button>
                 ))}
@@ -305,14 +305,14 @@ export default function HomePage() {
             <p className="subview-copy">Solo chi partecipa può leggere e scrivere.</p>
             {attendingEvents.length ? <div className="chat-list">
               {attendingEvents.map((event) => <button className="chat-preview" key={event.id} onClick={() => setActiveChat(event)}>
-                <img src={event.image} alt={`${event.title} presso ${event.venue}`} width="128" height="128" loading="lazy" decoding="async" /><div><strong>{event.title}</strong><span>{event.date} · {event.attendees + 1} partecipanti</span><p>Elisa: Qualcuno parte da Monza?</p></div><span className="unread">3</span>
+                <img className="event-photo-treatment" src={event.image} alt={`${event.title} presso ${event.venue}`} width="128" height="128" loading="lazy" decoding="async" /><div><strong>{event.title}</strong><span>{event.date} · {event.attendees + 1} partecipanti</span><p>Elisa: Qualcuno parte da Monza?</p></div><span className="unread">3</span>
               </button>)}
             </div> : <EmptyState icon={MessageCircle} title="Nessuna chat attiva" copy="Seleziona “Partecipo” per entrare nella chat di un evento." />}
           </section>}
 
           {view === "chats" && activeChat && <section className="chat-room">
             <div className="chat-room-header">
-              <button onClick={() => setActiveChat(null)} aria-label="Indietro"><ChevronLeft /></button><img src={activeChat.image} alt={`${activeChat.title} presso ${activeChat.venue}`} width="84" height="84" decoding="async" />
+              <button onClick={() => setActiveChat(null)} aria-label="Indietro"><ChevronLeft /></button><img className="event-photo-treatment" src={activeChat.image} alt={`${activeChat.title} presso ${activeChat.venue}`} width="84" height="84" decoding="async" />
               <div><strong>{activeChat.title}</strong><span>{activeChat.attendees + 1} partecipanti</span></div><button aria-label="Altre opzioni"><MoreHorizontal /></button>
             </div>
             <div className="safety-note"><ShieldCheck size={15} /> Chat protetta · segnala o blocca comportamenti inappropriati</div>
@@ -358,7 +358,7 @@ export default function HomePage() {
                 </DialogContent>
               </Dialog>
             </div>
-            <button className="venue-event" onClick={() => setSelected(events[0])}><img src={events[0].image} alt={`${events[0].title} presso ${events[0].venue}`} width="144" height="144" loading="lazy" decoding="async" /><div><span>VEN 28 AGO · 19:00</span><strong>Sunset Social Club</strong><p>86 partecipanti · 2.140 visualizzazioni</p></div><MoreHorizontal size={18} /></button>
+            <button className="venue-event" onClick={() => setSelected(events[0])}><img className="event-photo-treatment" src={events[0].image} alt={`${events[0].title} presso ${events[0].venue}`} width="144" height="144" loading="lazy" decoding="async" /><div><span>VEN 28 AGO · 19:00</span><strong>Sunset Social Club</strong><p>86 partecipanti · 2.140 visualizzazioni</p></div><MoreHorizontal size={18} /></button>
             <div className="venue-tip"><Sparkles size={18} /><div><strong>Porta più persone all’evento</strong><p>Completa descrizione e foto per migliorare la visibilità nel feed.</p></div></div>
           </section>}
         </div>
@@ -378,7 +378,7 @@ export default function HomePage() {
         <SheetContent side="bottom" className="event-sheet" showCloseButton={false}>
           {selected && <>
             <SheetHeader className="sr-only"><SheetTitle>{selected.title}</SheetTitle><SheetDescription>{selected.description}</SheetDescription></SheetHeader>
-            <div className="sheet-visual"><img src={selected.image} alt={`${selected.title} presso ${selected.venue}`} width="1040" height="560" decoding="async" /><span className="event-shade" />
+            <div className="sheet-visual"><img className="event-photo-treatment" src={selected.image} alt={`${selected.title} presso ${selected.venue}`} width="1040" height="560" decoding="async" /><span className="event-shade" />
               <button className="sheet-close" onClick={() => setSelected(null)} aria-label="Chiudi"><X size={19} /></button><button className="sheet-share" aria-label="Condividi"><Share2 size={18} /></button>
               <div><span className="event-category">{selected.category}</span><h2>{selected.title}</h2></div>
             </div>
