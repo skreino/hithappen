@@ -48,3 +48,14 @@ Una modifica è completata quando:
 - lint/test mirati passano, oppure il limite è documentato;
 - la documentazione è aggiornata se necessario;
 - il riepilogo finale elenca file modificati e verifiche eseguite.
+
+## Pubblicazione
+
+Salvo indicazione contraria dell’utente, al termine di ogni modifica completata e verificata:
+
+1. crea un commit Git descrittivo;
+2. esegui il push del branch corrente su GitHub;
+3. pubblica la versione aggiornata su Vercel in produzione;
+4. riporta hash del commit e URL della distribuzione.
+
+Se push o deploy sono bloccati da autenticazione, configurazione o controlli falliti, non ignorare il problema: descrivi con precisione cosa manca.

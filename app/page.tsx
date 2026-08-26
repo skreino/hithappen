@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element -- Vinext non espone il binding richiesto dall'ottimizzatore next/image in anteprima locale. */
 
 import { useMemo, useState } from "react";
 import {
@@ -58,8 +59,10 @@ const avatars = ["GA", "EL", "NO", "MF"];
 
 function BrandMark() {
   return (
-    <button onClick={() => window.location.reload()} className="brand-mark" aria-label="Torna alla home">
-      <span className="brand-hit">HIT</span><span className="brand-dot" /><span>HAPPEN</span>
+    <button type="button" onClick={() => window.location.reload()} className="brand-mark" aria-label="HitHappen — torna alla home">
+      <span className="brand-logo-crop" aria-hidden="true">
+        <img src="/branding/logo.png" alt="" width="2000" height="2000" decoding="async" />
+      </span>
     </button>
   );
 }
@@ -85,7 +88,7 @@ function EventCard({
   return (
     <article className={`event-card accent-${event.accent}`}>
       <button className="event-visual" onClick={onOpen} aria-label={`Apri ${event.title}`}>
-        <img src={event.image} alt="" /><span className="event-shade" />
+        <img src={event.image} alt={`${event.title} presso ${event.venue}`} width="1024" height="800" loading="lazy" decoding="async" /><span className="event-shade" />
         <span className="date-badge">{dateParts[0]}<strong>{dateParts[1]}</strong>{dateParts[2]}</span>
         <span className="price-badge">{event.price}</span>
         <span className="distance-badge"><MapPin size={13} /> {event.distance}</span>
@@ -122,6 +125,7 @@ export default function HomePage() {
   const [gameIndex, setGameIndex] = useState(0);
   const [gameDecision, setGameDecision] = useState<"like" | "skip" | null>(null);
   const [message, setMessage] = useState("");
+  const [activeFilter, setActiveFilter] = useState("Per te");
   const [messages, setMessages] = useState([
     { author: "Elisa", text: "Qualcuno parte da Monza verso le 18:30?", mine: false },
     { author: "Nora", text: "Io! Possiamo trovarci in stazione 👋", mine: false },
@@ -153,17 +157,18 @@ export default function HomePage() {
 
   return (
     <main className="prototype-stage">
+      <a className="skip-link" href="#app-content">Vai al contenuto</a>
       <aside className="desktop-context" aria-hidden="true">
         <BrandMark />
-        <div>
-          <span className="eyebrow">PROTOTIPO · MILANO + MB</span>
-          <h1>La serata giusta.<br />Le persone giuste.</h1>
-          <p>Scopri cosa succede intorno a te e unisciti alla chat prima che inizi.</p>
+        <div className="context-copy">
+          <span className="eyebrow">MILANO + MONZA BRIANZA</span>
+          <h1>Esci.<br /><em>Succede.</em></h1>
+          <p>Eventi vicini, persone reali e meno tempo perso a decidere cosa fare.</p>
         </div>
-        <div className="context-note"><Sparkles size={18} /><span>Dati e profili mostrati sono dimostrativi.</span></div>
+        <div className="context-note"><Sparkles size={18} /><span>Prototipo interattivo · dati dimostrativi</span></div>
       </aside>
 
-      <section className="app-shell">
+      <section className="app-shell" aria-label="Anteprima dell’app HitHappen">
         <header className="app-header">
           <BrandMark />
           <div className="header-actions">
@@ -172,14 +177,24 @@ export default function HomePage() {
           </div>
         </header>
 
-        <div className="app-scroll">
+        <div className="app-scroll" id="app-content" tabIndex={-1}>
           {view === "home" && <>
             <section className="feed-intro">
               <div><span className="kicker">Mercoledì, 26 agosto</span><h2>Cosa succede<br /><em>intorno a te</em></h2></div>
               <button className="search-button" aria-label="Cerca"><Search size={21} /></button>
             </section>
-            <div className="filter-row scrollbar-none">
-              {["Per te", "Stasera", "Live", "Aperitivo", "Gratis"].map((filter, index) => <button className={index === 0 ? "filter-chip active" : "filter-chip"} key={filter}>{filter}</button>)}
+            <div className="filter-row scrollbar-none" aria-label="Filtra gli eventi">
+              {["Per te", "Stasera", "Live", "Aperitivo", "Gratis"].map((filter) => (
+                <button
+                  type="button"
+                  className={activeFilter === filter ? "filter-chip active" : "filter-chip"}
+                  aria-pressed={activeFilter === filter}
+                  onClick={() => setActiveFilter(filter)}
+                  key={filter}
+                >
+                  {filter}
+                </button>
+              ))}
             </div>
             <div className="section-heading"><div><span>SCELTI PER TE</span><strong>In base ai tuoi gusti</strong></div><button onClick={() => setView("map")}>Vedi mappa</button></div>
             <div className="event-list">
@@ -197,7 +212,7 @@ export default function HomePage() {
             <div className="swipe-game">
               <div className="game-label"><span><Gamepad2 size={15} /> SERATA SWIPE</span><small>{gameIndex + 1} / {events.length}</small></div>
               <div className={`swipe-card ${gameDecision ? `decision-${gameDecision}` : ""}`}>
-                <img src={events[gameIndex].image} alt="" />
+                <img src={events[gameIndex].image} alt={`${events[gameIndex].title} presso ${events[gameIndex].venue}`} width="1024" height="1124" loading="lazy" decoding="async" />
                 <span className="event-shade" />
                 {gameDecision === "like" && <strong className="decision-stamp like-stamp">SALVATA</strong>}
                 {gameDecision === "skip" && <strong className="decision-stamp skip-stamp">PASSO</strong>}
@@ -268,7 +283,7 @@ export default function HomePage() {
               <div className="map-card-row scrollbar-none">
                 {events.map((event) => (
                   <button className="map-event-card" key={event.id} onClick={() => setSelected(event)}>
-                    <img src={event.image} alt="" />
+                    <img src={event.image} alt={`${event.title} presso ${event.venue}`} width="176" height="156" loading="lazy" decoding="async" />
                     <span><small>{event.date} · {event.distance}</small><strong>{event.title}</strong><b>{event.price}</b></span>
                   </button>
                 ))}
@@ -290,14 +305,14 @@ export default function HomePage() {
             <p className="subview-copy">Solo chi partecipa può leggere e scrivere.</p>
             {attendingEvents.length ? <div className="chat-list">
               {attendingEvents.map((event) => <button className="chat-preview" key={event.id} onClick={() => setActiveChat(event)}>
-                <img src={event.image} alt="" /><div><strong>{event.title}</strong><span>{event.date} · {event.attendees + 1} partecipanti</span><p>Elisa: Qualcuno parte da Monza?</p></div><span className="unread">3</span>
+                <img src={event.image} alt={`${event.title} presso ${event.venue}`} width="128" height="128" loading="lazy" decoding="async" /><div><strong>{event.title}</strong><span>{event.date} · {event.attendees + 1} partecipanti</span><p>Elisa: Qualcuno parte da Monza?</p></div><span className="unread">3</span>
               </button>)}
             </div> : <EmptyState icon={MessageCircle} title="Nessuna chat attiva" copy="Seleziona “Partecipo” per entrare nella chat di un evento." />}
           </section>}
 
           {view === "chats" && activeChat && <section className="chat-room">
             <div className="chat-room-header">
-              <button onClick={() => setActiveChat(null)} aria-label="Indietro"><ChevronLeft /></button><img src={activeChat.image} alt="" />
+              <button onClick={() => setActiveChat(null)} aria-label="Indietro"><ChevronLeft /></button><img src={activeChat.image} alt={`${activeChat.title} presso ${activeChat.venue}`} width="84" height="84" decoding="async" />
               <div><strong>{activeChat.title}</strong><span>{activeChat.attendees + 1} partecipanti</span></div><button aria-label="Altre opzioni"><MoreHorizontal /></button>
             </div>
             <div className="safety-note"><ShieldCheck size={15} /> Chat protetta · segnala o blocca comportamenti inappropriati</div>
@@ -343,7 +358,7 @@ export default function HomePage() {
                 </DialogContent>
               </Dialog>
             </div>
-            <button className="venue-event" onClick={() => setSelected(events[0])}><img src={events[0].image} alt="" /><div><span>VEN 28 AGO · 19:00</span><strong>Sunset Social Club</strong><p>86 partecipanti · 2.140 visualizzazioni</p></div><MoreHorizontal size={18} /></button>
+            <button className="venue-event" onClick={() => setSelected(events[0])}><img src={events[0].image} alt={`${events[0].title} presso ${events[0].venue}`} width="144" height="144" loading="lazy" decoding="async" /><div><span>VEN 28 AGO · 19:00</span><strong>Sunset Social Club</strong><p>86 partecipanti · 2.140 visualizzazioni</p></div><MoreHorizontal size={18} /></button>
             <div className="venue-tip"><Sparkles size={18} /><div><strong>Porta più persone all’evento</strong><p>Completa descrizione e foto per migliorare la visibilità nel feed.</p></div></div>
           </section>}
         </div>
@@ -351,8 +366,8 @@ export default function HomePage() {
         <nav className="bottom-nav" aria-label="Navigazione principale">
           {navItems.map(({ id, label, icon: Icon }) => {
             const isActive = view === id || ((view === "venue" || view === "saved") && id === "profile");
-            return <button className={`${isActive ? "active" : ""} ${id === "map" ? "map-nav-item" : ""}`} onClick={() => { setView(id); setActiveChat(null); }} key={id}>
-              <span className="nav-icon-wrap"><Icon size={id === "map" ? 25 : 21} fill={(isActive && (id === "home" || id === "map")) ? "currentColor" : "none"} /></span>
+            return <button aria-current={isActive ? "page" : undefined} className={`${isActive ? "active" : ""} ${id === "map" ? "map-nav-item" : ""}`} onClick={() => { setView(id); setActiveChat(null); }} key={id}>
+              <span className="nav-icon-wrap"><Icon size={id === "map" ? 25 : 21} fill={isActive && id === "home" ? "currentColor" : "none"} /></span>
               <span>{label}</span>{id === "chats" && attendingEvents.length > 0 && <i />}
             </button>;
           })}
@@ -363,7 +378,7 @@ export default function HomePage() {
         <SheetContent side="bottom" className="event-sheet" showCloseButton={false}>
           {selected && <>
             <SheetHeader className="sr-only"><SheetTitle>{selected.title}</SheetTitle><SheetDescription>{selected.description}</SheetDescription></SheetHeader>
-            <div className="sheet-visual"><img src={selected.image} alt="" /><span className="event-shade" />
+            <div className="sheet-visual"><img src={selected.image} alt={`${selected.title} presso ${selected.venue}`} width="1040" height="560" decoding="async" /><span className="event-shade" />
               <button className="sheet-close" onClick={() => setSelected(null)} aria-label="Chiudi"><X size={19} /></button><button className="sheet-share" aria-label="Condividi"><Share2 size={18} /></button>
               <div><span className="event-category">{selected.category}</span><h2>{selected.title}</h2></div>
             </div>
@@ -377,7 +392,7 @@ export default function HomePage() {
               <button className="venue-line"><span className="venue-logo small">TV</span><p><strong>{selected.venue}</strong><small><ShieldCheck size={13} /> Locale verificato</small></p><span>›</span></button>
               <div className="participants-block"><div><strong>Chi ci sarà</strong><AvatarStack count={selected.attendees + (attendingIds.includes(selected.id) ? 1 : 0)} /></div><button>Vedi tutti</button></div>
               <div className="sheet-actions">
-                <button className={savedIds.includes(selected.id) ? "round-action active" : "round-action"} onClick={() => toggleSaved(selected.id)}><Bookmark size={19} fill={savedIds.includes(selected.id) ? "currentColor" : "none"} /></button>
+                <button aria-label={savedIds.includes(selected.id) ? "Rimuovi dai salvati" : "Salva evento"} className={savedIds.includes(selected.id) ? "round-action active" : "round-action"} onClick={() => toggleSaved(selected.id)}><Bookmark size={19} fill={savedIds.includes(selected.id) ? "currentColor" : "none"} /></button>
                 <button className="primary-wide" onClick={() => toggleAttending(selected.id)}>{attendingIds.includes(selected.id) ? <><Check size={18} /> Partecipi · Apri la chat</> : <><UsersRound size={18} /> Partecipo</>}</button>
               </div>
               {attendingIds.includes(selected.id) && <button className="open-chat" onClick={() => { setSelected(null); setView("chats"); setActiveChat(selected); }}><MessageCircle size={18} /> Entra nella chat dell’evento <span>›</span></button>}
