@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "HitHappen",
-  description: "Scopri eventi e serate vicino a te, incontra persone e scegli cosa fare a Milano e Monza Brianza.",
+  title: "HitHappen — scopri cosa succede vicino a te",
+  description: "Eventi, concerti, aperitivi e attività vicino a te. Scopri dove andare e chi partecipa, a Milano e dintorni.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
   other: { "codex-preview": "development" },
 };
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: "light dark",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F3E7D3" },
-    { media: "(prefers-color-scheme: dark)", color: "#17120F" },
+    { media: "(prefers-color-scheme: light)", color: "#EEEDEB" },
+    { media: "(prefers-color-scheme: dark)", color: "#161714" },
   ],
 };
 
