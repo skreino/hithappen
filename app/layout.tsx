@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import "@fontsource-variable/inter";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,11 +10,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  colorScheme: "light dark",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#EEEDEB" },
-    { media: "(prefers-color-scheme: dark)", color: "#161714" },
-  ],
+  colorScheme: "light",
+  themeColor: "#EEEDEB",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -60,6 +60,23 @@ function ImmersiveCard({ event, onOpen }: { event: EventItem; onOpen: () => void
   return <button className="immersive-card" type="button" onClick={onOpen}><img src={event.image} alt={`${event.title} — ${event.venue}`} width="720" height="420" loading="lazy" /><span className="immersive-scrim" /><span className="immersive-copy"><strong>{event.title}</strong><b>{event.date} · {event.time}</b><small><MapPin weight="fill" /> {event.area} · {event.distance}</small><AvatarStack count={event.attendees} light /></span></button>;
 }
 
+function TonightCard({ event, onOpen }: { event: EventItem; onOpen: () => void }) {
+  return <button className="tonight-card" type="button" onClick={onOpen}>
+    <img src={event.image} alt={`${event.title} — ${event.venue}`} width="520" height="320" loading="lazy" />
+    <span className="tonight-copy">
+      <strong>{event.title}</strong>
+      <small><Clock weight="bold" /> {event.date} · {event.time}</small>
+      <small><MapPin weight="bold" /> {event.area} · {event.distance}</small>
+      <AvatarStack count={event.attendees} />
+    </span>
+  </button>;
+}
+
+function WeekendGallery({ openEvent }: { openEvent: (event: EventItem) => void }) {
+  const weekendEvents = [events[3], events[0], events[1]];
+  return <div className="weekend-gallery">{weekendEvents.map((event) => <button key={event.id} type="button" onClick={() => openEvent(event)} aria-label={`Apri ${event.title}`}><img src={event.image} alt={`${event.title} — ${event.venue}`} width="300" height="210" loading="lazy" /></button>)}</div>;
+}
+
 function MiniCard({ event, onOpen }: { event: EventItem; onOpen: () => void }) {
   return <button className="mini-event" type="button" onClick={onOpen}><img src={event.image} alt={`${event.title} — ${event.venue}`} width="360" height="250" loading="lazy" /><span><strong>{event.title}</strong><small>{event.date} · {event.area}</small></span></button>;
 }
@@ -79,10 +96,10 @@ function DiscoverView({ saved, toggleSaved, openEvent, setOverlay, showSaved }: 
       <button className="featured-copy" type="button" onClick={() => openEvent(featured)}><span className="event-title-row"><strong>{featured.title}</strong><CaretRight /></span><span><Clock weight="bold" /> {featured.date} · {featured.time}</span><span><MapPin weight="bold" /> {featured.area} · {featured.distance}</span></button>
       <SpatialStrip attendees={featured.attendees} />
     </article>
-    <section className="feed-section"><SectionHeading title="Stasera" /><ImmersiveCard event={events[1]} onOpen={() => openEvent(events[1])} /></section>
+    <section className="feed-section tonight-section"><SectionHeading title="Stasera" /><TonightCard event={events[1]} onOpen={() => openEvent(events[1])} /></section>
+    <section className="feed-section weekend-section"><SectionHeading title="Questo weekend" /><WeekendGallery openEvent={openEvent} /></section>
+    <section className="feed-section nearby-preview"><SectionHeading title="Vicino a te" /><div className="map-strip" aria-hidden="true"><span /><span /><span /></div></section>
     <section className="picker-banner"><span><Sparkle weight="fill" /></span><div><strong>Non sai cosa scegliere?</strong><p>Tre domande, una serata su misura.</p></div><button type="button" onClick={() => setOverlay("picker")}>Scegli per me <CaretRight /></button></section>
-    <section className="feed-section"><SectionHeading title="Questo weekend" /><div className="mini-event-grid">{events.slice(2).map((event) => <MiniCard key={event.id} event={event} onOpen={() => openEvent(event)} />)}</div></section>
-    <section className="feed-section nearby-preview"><SectionHeading title="Vicino a te" action="Apri mappa" /><div className="map-strip" aria-hidden="true"><span /><span /><span /></div></section>
   </div>;
 }
 
