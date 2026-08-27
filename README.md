@@ -4,7 +4,7 @@ HitHappen è un prototipo web mobile-first per scoprire eventi, serate e occasio
 
 ## Stato del progetto
 
-Questa repository contiene il prototipo interattivo attualmente pubblicato su [hithappen.skrea.chatgpt.site](https://hithappen.skrea.chatgpt.site).
+Questa repository contiene il prototipo interattivo attualmente pubblicato su [hithappen.vercel.app](https://hithappen.vercel.app).
 
 Le schermate e le interazioni sono reali, mentre eventi, utenti, partecipazioni, salvataggi e chat usano ancora dati dimostrativi. Backend, autenticazione, database e notifiche non sono ancora collegati.
 
@@ -18,6 +18,10 @@ Le schermate e le interazioni sono reali, mentre eventi, utenti, partecipazioni,
 - mappa centrale con gli eventi;
 - sezione giochi, incluso lo swipe delle serate;
 - tema automatico chiaro/scuro.
+
+## Direzione visiva
+
+L’interfaccia unisce UX mobile contemporanea e art direction retro-editoriale: fondo crema, rosso come accento, display typography condensata, fotografia urbana e una texture analogica molto sottile. La mappa resta l’azione centrale della navigazione.
 
 ## Avvio locale
 
