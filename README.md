@@ -13,15 +13,15 @@ Le schermate e le interazioni sono reali, mentre eventi, utenti, partecipazioni,
 - feed personalizzato di eventi;
 - dettaglio evento con prezzo, distanza e partecipanti;
 - eventi salvati;
-- partecipazione e chat evento dimostrativa;
-- profilo utente e profilo locale;
+- partecipazione e gruppi evento dimostrativi;
+- ricerca e filtri essenziali;
+- profilo utente con interessi e salvati;
 - mappa centrale con gli eventi;
-- sezione giochi, incluso lo swipe delle serate;
 - tema automatico chiaro/scuro.
 
 ## Direzione visiva
 
-L’interfaccia unisce UX mobile contemporanea e art direction retro-editoriale: fondo crema, rosso come accento, display typography condensata, fotografia urbana e una texture analogica molto sottile. La mappa resta l’azione centrale della navigazione.
+L’interfaccia è costruita come un prodotto consumer mobile contemporaneo: tipografia Inter Tight, superfici essenziali, fotografia urbana e rosso usato solo per azioni e stati importanti. L’influenza editoriale resta nella composizione e nel ritmo, senza texture o decorazioni rétro applicate all’intera UI. La mappa resta l’azione centrale della navigazione.
 
 ## Avvio locale
 
@@ -51,10 +51,13 @@ npm run build
 
 ## Struttura principale
 
-- `app/page.tsx`: interfaccia e flussi del prototipo;
-- `app/globals.css`: stile, responsive e temi;
-- `components/ui/`: componenti riutilizzabili;
-- `public/events/`: immagini dimostrative;
+- `components/hithappen-app.tsx`: coordinamento dello stato dell’app;
+- `features/`: viste Discover, Mappa, Dettaglio, Ricerca, Inbox e Profilo;
+- `components/events/`: sistema condiviso delle card evento;
+- `components/map/`, `components/navigation/`, `components/search/`, `components/ui/`: componenti di prodotto riutilizzabili;
+- `data/mock-events.ts`: fixture relative alla data corrente;
+- `lib/events/`: formattazione date, ricerca e filtri;
+- `app/globals.css`: design token, responsive e temi;
 - `docs/PRODUCT_BLUEPRINT.md`: visione, MVP e piano tecnico;
 - `AGENTS.md`: contesto e regole operative per Codex.
 
