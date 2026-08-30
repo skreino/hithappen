@@ -22,7 +22,7 @@ Le schermate e le interazioni sono reali, mentre eventi, utenti, partecipazioni,
 
 ## Direzione visiva
 
-L’interfaccia è dark-first e unisce prodotto mobile, cultura nightlife e art direction fashion-tech. Fotografie immersive, moduli asimmetrici con bordi tagliati e tipografia Inter Tight molto decisa costruiscono l’identità. La palette usa wine `#780116`, saffron `#F7B538`, amber `#DB7C26`, orange `#D8572A` e red `#C32F27`. La tab bar ha cinque azioni in liquid glass: Scopri, Cerca, Mappa, Inbox e Profilo, con Mappa centrale e maggiormente evidenziata.
+L’interfaccia è dark-first e unisce prodotto mobile, cultura nightlife e art direction fashion-tech. Fotografie immersive, moduli asimmetrici con bordi tagliati e tipografia Inter Tight molto decisa costruiscono l’identità. La palette usa burgundy `#780000`, signal red `#C1121F`, cream `#FDF0D5`, midnight blue `#003049` e powder blue `#669BBC`. La tab bar ha cinque azioni in liquid glass: Scopri, Cerca, Mappa, Inbox e Profilo, con Mappa centrale e maggiormente evidenziata.
 
 ## Avvio locale
 

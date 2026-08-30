@@ -4,10 +4,10 @@ Le immagini in questa cartella definiscono composizione, fotografia, gerarchia t
 
 La palette mostrata nelle immagini è stata sostituita dalla palette prodotto corrente:
 
-- `#780116`
-- `#F7B538`
-- `#DB7C26`
-- `#D8572A`
-- `#C32F27`
+- `#780000`
+- `#C1121F`
+- `#FDF0D5`
+- `#003049`
+- `#669BBC`
 
 Per colori e navigazione, `app/globals.css` e `docs/PRODUCT_BLUEPRINT.md` sono le fonti definitive.

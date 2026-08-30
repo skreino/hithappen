@@ -84,7 +84,7 @@ Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 
 - Esperienza dark-first ispirata alla cultura nightlife e all’editoria fashion contemporanea.
 - Fotografia autentica e immersiva come materiale visivo principale.
-- Palette nightlife calda: wine `#780116`, saffron `#F7B538`, amber `#DB7C26`, orange `#D8572A` e red `#C32F27`, sostenuta da neutri quasi neri.
+- Palette nightlife editoriale: burgundy `#780000`, signal red `#C1121F`, cream `#FDF0D5`, midnight blue `#003049` e powder blue `#669BBC`.
 - Navigazione a cinque azioni — Scopri, Cerca, Mappa, Inbox e Profilo — con superficie liquid glass e Mappa come controllo centrale più evidente.
 - Tipografia neo-grotesk molto decisa per i momenti editoriali, con metadata sempre leggibili.
 - Moduli asimmetrici e bordi tagliati usati con disciplina; niente texture rétro globale, glassmorphism o card SaaS generiche.
