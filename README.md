@@ -17,11 +17,11 @@ Le schermate e le interazioni sono reali, mentre eventi, utenti, partecipazioni,
 - ricerca e filtri essenziali;
 - profilo utente con interessi e salvati;
 - mappa centrale con gli eventi;
-- tema automatico chiaro/scuro.
+- tema dark-first coerente con il mondo nightlife.
 
 ## Direzione visiva
 
-L’interfaccia è costruita come un prodotto consumer mobile contemporaneo: tipografia Inter Tight, superfici essenziali, fotografia urbana e rosso usato solo per azioni e stati importanti. L’influenza editoriale resta nella composizione e nel ritmo, senza texture o decorazioni rétro applicate all’intera UI. La mappa resta l’azione centrale della navigazione.
+L’interfaccia è dark-first e unisce prodotto mobile, cultura nightlife e art direction fashion-tech. Fotografie immersive, moduli asimmetrici con bordi tagliati e tipografia Inter Tight molto decisa costruiscono l’identità. Chartreuse e lilla distinguono azioni, selezioni e prezzi; il rosso resta confinato al marchio. La mappa rimane l’azione centrale della navigazione.
 
 ## Avvio locale
 
@@ -58,6 +58,7 @@ npm run build
 - `data/mock-events.ts`: fixture relative alla data corrente;
 - `lib/events/`: formattazione date, ricerca e filtri;
 - `app/globals.css`: design token, responsive e temi;
+- `docs/design-references/nightlife-editorial/`: reference visive approvate per Home, Dettaglio e Mappa;
 - `docs/PRODUCT_BLUEPRINT.md`: visione, MVP e piano tecnico;
 - `AGENTS.md`: contesto e regole operative per Codex.
 

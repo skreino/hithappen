@@ -1,4 +1,5 @@
-import { Bell, MapPin, MagnifyingGlass } from "@phosphor-icons/react";
+/* eslint-disable @next/next/no-img-element -- Event photography is served from project and editorial sources. */
+import { Bell, CaretDown, MagnifyingGlass } from "@phosphor-icons/react";
 import type { EventItem } from "@/data/mock-events";
 import { isThisWeekend, isToday } from "@/lib/events/date";
 import { EventCard } from "@/components/events/event-card";
@@ -13,10 +14,11 @@ export function DiscoverView({ events, saved, quickFilter, onFilter, onOpen, onS
   const weekend = events.filter((event) => isThisWeekend(event.startAt) && event.id !== featured?.id);
   const nearby = [...events].filter((event) => event.id !== featured?.id).sort((a,b) => a.distanceKm - b.distanceKm);
   const rows = quickFilter === "free" ? events.filter((event) => event.price === 0) : quickFilter === "weekend" ? weekend : quickFilter === "tomorrow" ? events.filter((event) => !isToday(event.startAt)).slice(0,5) : tonight;
+  const heroImage = events.find((event) => event.category === "Club")?.image ?? featured?.image;
 
   return <main className="view discover-view">
-    <header className="discover-topbar"><button type="button" className="location-select"><MapPin size={17} weight="fill" /><span><small>Sei a</small><strong>Milano</strong></span></button><div><AppIconButton icon={MagnifyingGlass} label="Cerca" onClick={onSearch} /><AppIconButton icon={Bell} label="Notifiche" onClick={onNotifications} /></div></header>
-    <section className="discover-intro"><p>Il meglio intorno a te</p><h1>Che si fa stasera?</h1><FilterChips active={quickFilter} onChange={onFilter} /></section>
+    <header className="discover-topbar"><span className="brand-mark" aria-label="HitHappen">H</span><button type="button" className="location-select"><strong>Milano</strong><CaretDown size={16} /></button><div><AppIconButton icon={MagnifyingGlass} label="Cerca" onClick={onSearch} /><AppIconButton icon={Bell} label="Notifiche" onClick={onNotifications} /></div></header>
+    <section className="discover-intro">{heroImage && <img src={heroImage} alt="" />}<div className="discover-intro__copy"><h1>Che succede<br />stasera?</h1><FilterChips active={quickFilter} onChange={onFilter} showFree={false} /></div></section>
     {featured && <FeaturedEventCard event={featured} saved={saved.has(featured.id)} onSave={() => onSave(featured.id)} onOpen={() => onOpen(featured)} />}
     <section className="content-section"><SectionHeader title={quickFilter === "tonight" ? "Stasera" : quickFilter === "tomorrow" ? "Domani" : quickFilter === "weekend" ? "Questo weekend" : "Gratis"} /><div className="event-grid">{rows.slice(0,4).map((event) => <EventCard key={event.id} event={event} saved={saved.has(event.id)} onSave={() => onSave(event.id)} onOpen={() => onOpen(event)} />)}</div></section>
     <section className="content-section"><SectionHeader title="Per te" /><div className="event-grid">{events.slice(4,8).map((event) => <EventCard key={event.id} event={event} saved={saved.has(event.id)} onSave={() => onSave(event.id)} onOpen={() => onOpen(event)} />)}</div></section>

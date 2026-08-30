@@ -24,7 +24,7 @@ Prima di modificare il prodotto, leggi:
 - Il feed considera interessi, generi musicali, distanza, zona, salvataggi e partecipazioni.
 - Solo locali verificati potranno pubblicare eventi reali.
 - La chat evento è riservata ai partecipanti e dovrà includere blocco, segnalazione e moderazione.
-- Supportare tema automatico chiaro/scuro.
+- Mantenere il tema dark-first approvato; un eventuale tema chiaro è una fase successiva e non deve diluire la direzione nightlife.
 - L'area iniziale è Milano e Monza Brianza.
 
 ## Regole tecniche
@@ -44,7 +44,7 @@ Una modifica è completata quando:
 
 - il comportamento richiesto funziona;
 - non rompe navigazione e layout mobile;
-- stati chiaro e scuro restano leggibili;
+- contrasto, leggibilità e safe area del tema dark restano corretti;
 - lint/test mirati passano, oppure il limite è documentato;
 - la documentazione è aggiornata se necessario;
 - il riepilogo finale elenca file modificati e verifiche eseguite.

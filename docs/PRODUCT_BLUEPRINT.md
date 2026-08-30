@@ -80,6 +80,16 @@ Ogni card mostra subito:
 
 Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 
+### Direzione visiva consumer
+
+- Esperienza dark-first ispirata alla cultura nightlife e all’editoria fashion contemporanea.
+- Fotografia autentica e immersiva come materiale visivo principale.
+- Palette quasi nera e verde profondo, con chartreuse per azioni/selezioni e lilla per prezzi/stati secondari.
+- Rosso limitato al marchio HitHappen.
+- Tipografia neo-grotesk molto decisa per i momenti editoriali, con metadata sempre leggibili.
+- Moduli asimmetrici e bordi tagliati usati con disciplina; niente texture rétro globale, glassmorphism o card SaaS generiche.
+- Reference implementative conservate in `docs/design-references/nightlife-editorial/`.
+
 ### Dettaglio evento
 
 - Copertina e galleria.
