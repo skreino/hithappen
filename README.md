@@ -17,11 +17,12 @@ Le schermate e le interazioni sono reali, mentre eventi, utenti, partecipazioni,
 - ricerca e filtri essenziali;
 - profilo utente con interessi e salvati;
 - mappa centrale con gli eventi;
-- tema dark-first coerente con il mondo nightlife.
+- tema dark-first coerente con il mondo nightlife;
+- navigazione liquid-glass a cinque azioni con Mappa centrale.
 
 ## Direzione visiva
 
-L’interfaccia è dark-first e unisce prodotto mobile, cultura nightlife e art direction fashion-tech. Fotografie immersive, moduli asimmetrici con bordi tagliati e tipografia Inter Tight molto decisa costruiscono l’identità. Chartreuse e lilla distinguono azioni, selezioni e prezzi; il rosso resta confinato al marchio. La mappa rimane l’azione centrale della navigazione.
+L’interfaccia è dark-first e unisce prodotto mobile, cultura nightlife e art direction fashion-tech. Fotografie immersive, moduli asimmetrici con bordi tagliati e tipografia Inter Tight molto decisa costruiscono l’identità. La palette usa wine `#780116`, saffron `#F7B538`, amber `#DB7C26`, orange `#D8572A` e red `#C32F27`. La tab bar ha cinque azioni in liquid glass: Scopri, Cerca, Mappa, Inbox e Profilo, con Mappa centrale e maggiormente evidenziata.
 
 ## Avvio locale
 

@@ -42,7 +42,7 @@ export function HitHappenApp() {
     {tab === "map" && <MapView events={filteredEvents} selected={mapSelection} onSelect={setMapSelection} onOpen={openEvent} onFilters={() => setOverlay("filters")} />}
     {tab === "inbox" && <InboxView events={mockEvents} />}
     {tab === "profile" && <ProfileView events={mockEvents} saved={saved} onOpen={openEvent} />}
-    <BottomNavigation active={tab} onChange={switchTab} />
+    <BottomNavigation active={tab} onChange={switchTab} onSearch={() => setOverlay("search")} />
   </div>
   <aside className="desktop-context"><p>Stasera a Milano</p><h2>La città è già in movimento.</h2><div className="desktop-context__list">{mockEvents.slice(0,4).map((event,index) => <button type="button" key={event.id} onClick={() => openEvent(event)}><span>{String(index + 1).padStart(2,"0")}</span><strong>{event.title}</strong><small>{event.neighborhood} · {event.distanceKm.toLocaleString("it-IT")} km</small></button>)}</div></aside>
   {overlay === "search" && <SearchOverlay events={filteredEvents} query={query} onQuery={setQuery} onClose={() => setOverlay(null)} onOpen={openEvent} />}

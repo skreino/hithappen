@@ -19,6 +19,7 @@ Prima di modificare il prodotto, leggi:
 
 - La home principale è il feed personalizzato.
 - La mappa è l'azione centrale e visivamente distinta nella navigazione inferiore.
+- La navigazione inferiore contiene cinque azioni: Scopri, Cerca, Mappa, Inbox e Profilo; Mappa occupa la posizione centrale.
 - I salvati sono accessibili dal profilo, non dalla navigazione principale.
 - La sezione giochi deve aiutare a scegliere una serata; non deve sembrare un'app di dating.
 - Il feed considera interessi, generi musicali, distanza, zona, salvataggi e partecipazioni.

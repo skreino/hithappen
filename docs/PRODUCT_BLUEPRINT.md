@@ -84,8 +84,8 @@ Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 
 - Esperienza dark-first ispirata alla cultura nightlife e all’editoria fashion contemporanea.
 - Fotografia autentica e immersiva come materiale visivo principale.
-- Palette quasi nera e verde profondo, con chartreuse per azioni/selezioni e lilla per prezzi/stati secondari.
-- Rosso limitato al marchio HitHappen.
+- Palette nightlife calda: wine `#780116`, saffron `#F7B538`, amber `#DB7C26`, orange `#D8572A` e red `#C32F27`, sostenuta da neutri quasi neri.
+- Navigazione a cinque azioni — Scopri, Cerca, Mappa, Inbox e Profilo — con superficie liquid glass e Mappa come controllo centrale più evidente.
 - Tipografia neo-grotesk molto decisa per i momenti editoriali, con metadata sempre leggibili.
 - Moduli asimmetrici e bordi tagliati usati con disciplina; niente texture rétro globale, glassmorphism o card SaaS generiche.
 - Reference implementative conservate in `docs/design-references/nightlife-editorial/`.
