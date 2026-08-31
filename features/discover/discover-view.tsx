@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- Event photography is served from project and editorial sources. */
 import { Bell, CaretDown, MagnifyingGlass } from "@phosphor-icons/react";
 import type { EventItem } from "@/data/mock-events";
 import { isThisWeekend, isToday } from "@/lib/events/date";
