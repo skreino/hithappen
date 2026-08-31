@@ -40,7 +40,7 @@ img { display: block; }
 .icon-control:hover { border-color: var(--color-border); background: rgba(253,240,213,.05); }
 .icon-control:active { transform: scale(.94); }
 .icon-control.is-active { color: var(--color-accent); }
-.brand-mark, .map-brand { display: block; width: 100px; height: 44px; overflow: hidden; background-image: url('/branding/wordmark.png'); background-position: calc(50% + 18px) calc(50% + 20px); background-repeat: no-repeat; background-size: 200px; filter: invert(1); mix-blend-mode: screen; }
+.brand-mark, .map-brand { display: block; width: 100px; height: 44px; background: url('/branding/wordmark-transparent.png') left center / contain no-repeat; }
 
 /* Discover */
 .discover-topbar { min-height: 68px; padding-top: max(7px,env(safe-area-inset-top)); display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 8px; }
