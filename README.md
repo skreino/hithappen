@@ -18,11 +18,11 @@ Le schermate e le interazioni sono reali, mentre eventi, utenti, partecipazioni,
 - profilo utente con interessi e salvati;
 - mappa centrale con gli eventi;
 - tema dark-first coerente con il mondo nightlife;
-- navigazione liquid-glass a cinque azioni con Mappa centrale.
+- navigazione mobile a cinque azioni con Mappa centrale.
 
 ## Direzione visiva
 
-L’interfaccia è dark-first e unisce prodotto mobile, cultura nightlife e art direction fashion-tech. Fotografie immersive, moduli asimmetrici con bordi tagliati e tipografia Inter Tight molto decisa costruiscono l’identità. La palette usa burgundy `#780000`, signal red `#C1121F`, cream `#FDF0D5`, midnight blue `#003049` e powder blue `#669BBC`. La tab bar ha cinque azioni in liquid glass: Scopri, Cerca, Mappa, Inbox e Profilo, con Mappa centrale e maggiormente evidenziata.
+L’interfaccia segue una direzione masculine-baddie pensata per la nightlife: fondo ink, crema, rosso brand e metallo freddo. Archivo Variable costruisce una gerarchia fashion ma leggibile, mentre fotografia flash, superfici morbide e un solo accento eliminano il rumore della versione precedente. La Home concentra la scelta in un evento principale, un carousel per la serata, una lista rapida di raccomandazioni e il weekend. La tab bar mantiene Scopri, Cerca, Mappa, Inbox e Profilo, con Mappa centrale e maggiormente evidenziata.
 
 ## Avvio locale
 

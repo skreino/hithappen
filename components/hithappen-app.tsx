@@ -44,7 +44,7 @@ export function HitHappenApp() {
     {tab === "profile" && <ProfileView events={mockEvents} saved={saved} onOpen={openEvent} />}
     <BottomNavigation active={tab} onChange={switchTab} onSearch={() => setOverlay("search")} />
   </div>
-  <aside className="desktop-context"><p>Stasera a Milano</p><h2>La città è già in movimento.</h2><div className="desktop-context__list">{mockEvents.slice(0,4).map((event,index) => <button type="button" key={event.id} onClick={() => openEvent(event)}><span>{String(index + 1).padStart(2,"0")}</span><strong>{event.title}</strong><small>{event.neighborhood} · {event.distanceKm.toLocaleString("it-IT")} km</small></button>)}</div></aside>
+  <aside className="desktop-context"><p>Scelte per te</p><h2>La notte giusta è più vicina di quanto pensi.</h2><div className="desktop-context__list">{mockEvents.slice(0,4).map((event) => <button type="button" key={event.id} onClick={() => openEvent(event)}><strong>{event.title}</strong><small>{event.neighborhood} · {event.distanceKm.toLocaleString("it-IT")} km</small></button>)}</div></aside>
   {overlay === "search" && <SearchOverlay events={filteredEvents} query={query} onQuery={setQuery} onClose={() => setOverlay(null)} onOpen={openEvent} />}
   {overlay === "filters" && <FilterSheet value={filters} resultCount={filteredEvents.length} onChange={setFilters} onReset={() => setFilters(defaultFilters)} onClose={() => setOverlay(null)} />}
   </div>;

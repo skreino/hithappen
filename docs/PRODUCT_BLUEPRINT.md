@@ -85,9 +85,10 @@ Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 - Esperienza dark-first ispirata alla cultura nightlife e all’editoria fashion contemporanea.
 - Fotografia autentica e immersiva come materiale visivo principale.
 - Palette nightlife editoriale: burgundy `#780000`, signal red `#C1121F`, cream `#FDF0D5`, midnight blue `#003049` e powder blue `#669BBC`.
-- Navigazione a cinque azioni — Scopri, Cerca, Mappa, Inbox e Profilo — con superficie liquid glass e Mappa come controllo centrale più evidente.
-- Tipografia neo-grotesk molto decisa per i momenti editoriali, con metadata sempre leggibili.
-- Moduli asimmetrici e bordi tagliati usati con disciplina; niente texture rétro globale, glassmorphism o card SaaS generiche.
+- Navigazione a cinque azioni: Scopri, Cerca, Mappa, Inbox e Profilo, con Mappa come controllo centrale più evidente.
+- Archivo Variable per titoli compatti, metadata leggibili e un registro fashion contemporaneo.
+- Superfici morbide, fotografia flash e gerarchie nette; niente bordi tagliati, texture rétro globale o card SaaS generiche.
+- Home semplificata in evento principale, carousel della serata, raccomandazioni rapide e weekend.
 - Reference implementative conservate in `docs/design-references/nightlife-editorial/`.
 
 ### Dettaglio evento
