@@ -22,7 +22,9 @@ Eventi e distanze sono dimostrativi. Preferiti e avanzamento Match vengono salva
 
 ## Direzione visiva
 
-Direzione iOS-inspired approvata: fondo `#131419`, pannelli opachi `#2C2D35`, testo `#F5F5F7`, secondario `#AEB0BA`, lime `#D6FF5F`. Font di sistema: SF su Apple, fallback sugli altri dispositivi. Wordmark conservato, senza pannello decorativo desktop. Vetro limitato a testate e navigazione. Cinque voci: Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena lime. Ricerca solo nella testata sticky; il catalogo completo si apre con “Esplora tutti”.
+Direzione iOS-inspired con palette calda: bordeaux `#780116`, oro `#F7B538`, ambra `#DB7C26`, arancio `#D8572A`, rosso `#C32F27`. Base scura derivata `#1C1013`, pannelli opachi `#342327`, testo `#FAF5F1`, secondario `#C5B4AE`. Oro per le azioni principali, toni rossi per il fondo. Font di sistema: SF su Apple, fallback sugli altri dispositivi. Wordmark conservato, senza pannello decorativo desktop. Vetro limitato a testate e navigazione. Cinque voci: Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena oro. Ricerca solo nella testata sticky; il catalogo completo si apre con “Esplora tutti”.
+
+La fiamma AnimateIcons fornita dall’utente è adattata in SVG/CSS come filigrana non interattiva dietro alle pagine. Movimento introduttivo di 4,8 secondi, poi statico; disabilitato con `prefers-reduced-motion`. Nessuna nuova dipendenza. Fotografie e cartografia rimangono prive di filtri cromatici. Attribuzione MIT in `public/THIRD_PARTY_NOTICES.md`.
 
 ## Avvio locale
 

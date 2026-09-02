@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { FlameBackdrop } from "@/components/ui/flame-backdrop";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
@@ -12,11 +13,11 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: "dark",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#131419" },
-    { media: "(prefers-color-scheme: dark)", color: "#131419" },
+    { media: "(prefers-color-scheme: light)", color: "#1c1013" },
+    { media: "(prefers-color-scheme: dark)", color: "#1c1013" },
   ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="it"><body>{children}</body></html>;
+  return <html lang="it"><body><FlameBackdrop />{children}</body></html>;
 }

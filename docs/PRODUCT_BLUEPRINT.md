@@ -86,9 +86,10 @@ Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 
 ### Direzione visiva consumer
 
-- Stile iOS-inspired web: grafite `#131419`, pannelli `#2C2D35`, testo `#F5F5F7`, secondario `#AEB0BA`, accento `#D6FF5F`.
+- Stile iOS-inspired web, palette calda approvata: `#780116`, `#F7B538`, `#DB7C26`, `#D8572A`, `#C32F27`. Fondo derivato `#1C1013`, pannelli `#342327`, testo `#FAF5F1`, secondario `#C5B4AE`; oro per le azioni principali.
+- Fiamma AnimateIcons in filigrana dietro ai contenuti: introduzione CSS di 4,8 secondi, poi statica; nessuna animazione con reduced-motion. Fotografie e mappa non vengono tinte.
 - System sans, SF sui dispositivi Apple; wordmark invariato.
-- Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena lime.
+- Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena oro.
 - Ricerca esclusivamente nella testata sticky. Catalogo separato dalla Home.
 - Superfici contenuto opache, vetro solo per testate e navigazione; nessun pannello promozionale desktop.
 - Touch target dei controlli almeno 44 px, safe area, focus visibile e reduced-motion.
