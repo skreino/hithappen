@@ -6,23 +6,23 @@ HitHappen è un prototipo web mobile-first per scoprire eventi, serate e occasio
 
 Questa repository contiene il prototipo interattivo attualmente pubblicato su [hithappen.vercel.app](https://hithappen.vercel.app).
 
-Le schermate e le interazioni sono reali, mentre eventi, utenti, partecipazioni, salvataggi e chat usano ancora dati dimostrativi. Backend, autenticazione, database e notifiche non sono ancora collegati.
+Eventi e distanze sono dimostrativi. Preferiti e avanzamento Match vengono salvati realmente sul dispositivo (localStorage versionato, senza dati personali); non sono sincronizzati online. Partecipazione solo demo; Inbox esplicitamente non attiva. Backend, autenticazione e notifiche non sono collegati.
 
 ## Funzioni presenti
 
-- feed personalizzato di eventi;
+- Home essenziale con carosello manuale di tre serate e tre proposte non duplicate;
 - dettaglio evento con prezzo, distanza e partecipanti;
 - eventi salvati;
-- partecipazione e gruppi evento dimostrativi;
+- Match personale con swipe, pulsanti equivalenti, dettagli, annulla e riepilogo;
 - ricerca e filtri essenziali;
-- profilo utente con interessi e salvati;
-- mappa centrale con gli eventi;
+- profilo demo con tutti i preferiti del dispositivo;
+- mappa Leaflet/OpenStreetMap, marker geografici, lista e anteprima sincronizzate, zoom e geolocalizzazione con gestione errori;
 - tema dark-first coerente con il mondo nightlife;
 - navigazione mobile a cinque azioni con Mappa centrale.
 
 ## Direzione visiva
 
-L’interfaccia segue una direzione masculine-baddie pensata per la nightlife: fondo ink, crema, rosso brand e metallo freddo. Archivo Variable costruisce una gerarchia fashion ma leggibile, mentre fotografia flash, superfici morbide e un solo accento eliminano il rumore della versione precedente. La Home concentra la scelta in un evento principale, un carousel per la serata, una lista rapida di raccomandazioni e il weekend. La tab bar mantiene Scopri, Cerca, Mappa, Inbox e Profilo, con Mappa centrale e maggiormente evidenziata.
+Direzione iOS-inspired approvata: fondo `#131419`, pannelli opachi `#2C2D35`, testo `#F5F5F7`, secondario `#AEB0BA`, lime `#D6FF5F`. Font di sistema: SF su Apple, fallback sugli altri dispositivi. Wordmark conservato, senza pannello decorativo desktop. Vetro limitato a testate e navigazione. Cinque voci: Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena lime. Ricerca solo nella testata sticky; il catalogo completo si apre con “Esplora tutti”.
 
 ## Avvio locale
 
@@ -36,7 +36,7 @@ Requisiti:
 git clone https://github.com/skreino/hithappen.git
 cd hithappen
 npm ci
-npm run dev
+npm run dev:local
 ```
 
 Apri quindi l'indirizzo mostrato dal terminale, normalmente `http://localhost:5173`.
@@ -53,13 +53,13 @@ npm run build
 ## Struttura principale
 
 - `components/hithappen-app.tsx`: coordinamento dello stato dell’app;
-- `features/`: viste Discover, Mappa, Dettaglio, Ricerca, Inbox e Profilo;
+- `features/`: viste Discover/catalogo, Match, Mappa, Dettaglio, Ricerca, Inbox e Profilo;
 - `components/events/`: sistema condiviso delle card evento;
 - `components/map/`, `components/navigation/`, `components/search/`, `components/ui/`: componenti di prodotto riutilizzabili;
 - `data/mock-events.ts`: fixture relative alla data corrente;
-- `lib/events/`: formattazione date, ricerca e filtri;
+- `lib/events/`: formattazione date, ricerca, filtri, ranking demo e stato persistente;
 - `app/globals.css`: design token, responsive e temi;
-- `docs/design-references/nightlife-editorial/`: reference visive approvate per Home, Dettaglio e Mappa;
+- `tests/e2e/`: test browser su 390 × 844, 320 × 568 e 1440 × 900;
 - `docs/PRODUCT_BLUEPRINT.md`: visione, MVP e piano tecnico;
 - `AGENTS.md`: contesto e regole operative per Codex.
 
@@ -74,3 +74,5 @@ Clona la repository, apri la cartella in Codex e chiedi, ad esempio:
 > Leggi AGENTS.md e docs/PRODUCT_BLUEPRINT.md, poi avvia il progetto e spiegami la prossima attività consigliata.
 
 Codex potrà modificare soltanto la cartella aperta e le risorse che autorizzi.
+
+I test end-to-end avviano una build Next.js locale sulla porta 4174 e richiedono Chrome (oppure `PW_CHANNEL=msedge`). La posizione nei test è sintetica, senza permessi. Le tile OSM possono essere bloccate per verificare la lista di fallback. L’anteprima Vite resta indipendente sulla porta 5173.

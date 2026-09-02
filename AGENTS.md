@@ -17,12 +17,13 @@ Prima di modificare il prodotto, leggi:
 
 ## Principi di prodotto
 
-- La home principale è il feed personalizzato.
+- Home: carosello manuale, tre proposte non duplicate e accesso al catalogo. Ricerca sticky in alto, mai nella tab bar.
 - La mappa è l'azione centrale e visivamente distinta nella navigazione inferiore.
-- La navigazione inferiore contiene cinque azioni: Scopri, Cerca, Mappa, Inbox e Profilo; Mappa occupa la posizione centrale.
+- La navigazione inferiore contiene cinque azioni: Scopri, Match, Mappa, Inbox e Profilo; Mappa occupa la posizione centrale.
 - I salvati sono accessibili dal profilo, non dalla navigazione principale.
 - La sezione giochi deve aiutare a scegliere una serata; non deve sembrare un'app di dating.
-- Il feed considera interessi, generi musicali, distanza, zona, salvataggi e partecipazioni.
+- La selezione corrente usa vicinanza e interesse ricevuto demo; non dichiarare un algoritmo personalizzato reale.
+- Palette grafite/lime e font di sistema approvati. Match personale e preferiti persistono sul dispositivo; non creare chat o abbinamenti simulati.
 - Solo locali verificati potranno pubblicare eventi reali.
 - La chat evento è riservata ai partecipanti e dovrà includere blocco, segnalazione e moderazione.
 - Mantenere il tema dark-first approvato; un eventuale tema chiaro è una fase successiva e non deve diluire la direzione nightlife.

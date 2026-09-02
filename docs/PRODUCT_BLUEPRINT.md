@@ -1,6 +1,10 @@
 # HitHappen — Product Blueprint v0.1
 
-Data: 26 agosto 2026
+Aggiornato: 2 settembre 2026
+
+## Stato implementato — consumer web
+
+La versione attuale usa dati demo, senza backend. Home con carosello manuale (tre serate, ranking deterministico vicinanza/interesse), tre proposte distinte e catalogo completo filtrabile. Match personale valuta tutti gli eventi: swipe o pulsanti, annulla, dettaglio senza reset, riepilogo. Preferiti e cronologia persistono con schema `hithappen:personal:v1`; nessun dato personale viene salvato. Leaflet mostra coordinate reali su OpenStreetMap con zoom, selezione marker/lista/anteprima, posizione opzionale e fallback agli eventi se le tile falliscono. Distanze e partecipazioni restano demo. Inbox non simula messaggi. Le sezioni successive descrivono anche funzionalità future, non tutte già operative.
 
 ## 1. Visione
 
@@ -82,14 +86,12 @@ Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 
 ### Direzione visiva consumer
 
-- Esperienza dark-first ispirata alla cultura nightlife e all’editoria fashion contemporanea.
-- Fotografia autentica e immersiva come materiale visivo principale.
-- Palette nightlife editoriale: burgundy `#780000`, signal red `#C1121F`, cream `#FDF0D5`, midnight blue `#003049` e powder blue `#669BBC`.
-- Navigazione a cinque azioni: Scopri, Cerca, Mappa, Inbox e Profilo, con Mappa come controllo centrale più evidente.
-- Archivo Variable per titoli compatti, metadata leggibili e un registro fashion contemporaneo.
-- Superfici morbide, fotografia flash e gerarchie nette; niente bordi tagliati, texture rétro globale o card SaaS generiche.
-- Home semplificata in evento principale, carousel della serata, raccomandazioni rapide e weekend.
-- Reference implementative conservate in `docs/design-references/nightlife-editorial/`.
+- Stile iOS-inspired web: grafite `#131419`, pannelli `#2C2D35`, testo `#F5F5F7`, secondario `#AEB0BA`, accento `#D6FF5F`.
+- System sans, SF sui dispositivi Apple; wordmark invariato.
+- Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena lime.
+- Ricerca esclusivamente nella testata sticky. Catalogo separato dalla Home.
+- Superfici contenuto opache, vetro solo per testate e navigazione; nessun pannello promozionale desktop.
+- Touch target dei controlli almeno 44 px, safe area, focus visibile e reduced-motion.
 
 ### Dettaglio evento
 
@@ -142,7 +144,7 @@ Per la prima beta reale:
 - Pagamenti e commissioni.
 - Messaggi privati tra utenti.
 - Sistema follower completo.
-- Matching stile dating e mini-giochi.
+- Matching tra persone / dating. Il Match personale per scegliere eventi è invece incluso nel prototipo.
 - Importazione automatica massiva da social o siti.
 - Pubblicazione libera da parte di utenti non verificati.
 - Motore di raccomandazione basato su machine learning.
