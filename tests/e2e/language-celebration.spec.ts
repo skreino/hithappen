@@ -50,7 +50,7 @@ test("map markers survive language changes and music filtering", async ({ page }
   await expect(page.locator(".map-preview")).toContainText("Live indie al Biko");
 });
 
-test("only positive Match choices celebrate, including the last card", async ({ page }) => {
+test("Match gives distinct animations for interested and skipped choices", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.getByRole("button", { name: "Match", exact: true }).click();
   await page.getByRole("button", { name: "Mi interessa", exact: true }).click();
@@ -59,8 +59,11 @@ test("only positive Match choices celebrate, including the last card", async ({ 
   await expect(page.locator(".celebration")).toHaveCSS("pointer-events", "none");
   await page.getByRole("button", { name: "Annulla ultima scelta" }).click();
   await expect(page.locator(".celebration")).toHaveCount(0);
-  for (let i = 0; i < 11; i++) await page.getByRole("button", { name: "Passa", exact: true }).click();
-  await expect(page.locator(".celebration")).toHaveCount(0);
+  await page.getByRole("button", { name: "Passa", exact: true }).click();
+  await expect(page.locator(".celebration--pass .celebration__message")).toContainText("Serata passata");
+  await expect(page.locator(".celebration__pass-lines i")).toHaveCount(3);
+  await expect(page.locator(".celebration__particles")).toHaveCount(0);
+  for (let i = 0; i < 10; i++) await page.getByRole("button", { name: "Passa", exact: true }).click();
   await page.getByRole("button", { name: "Mi interessa", exact: true }).click();
   await expect(page.locator(".match-summary .celebration__message")).toContainText("Serata salvata");
   await page.getByRole("button", { name: "Annulla ultima", exact: true }).click();

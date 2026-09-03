@@ -127,6 +127,7 @@ export const english: Record<string, string> = {
   "Mi interessa": "I'm interested",
   "Le scelte restano su questo dispositivo · demo": "Your picks stay on this device · demo",
   "Serata salvata": "Night saved",
+  "Serata passata": "Night skipped",
   "La ritrovi nel Profilo.": "Find it in your Profile.",
   "Ci sei, in modalità demo": "You're in — demo mode",
   "Salvataggio locale non disponibile: le scelte restano in questa sessione.": "Local storage unavailable: your picks stay in this session.",

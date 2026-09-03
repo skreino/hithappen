@@ -1,17 +1,25 @@
 import { expect, test } from "@playwright/test";
 
-test("warm ambient background has no flames or continuous motion", async ({ page }) => {
+test("day theme is bright red and warm white without background motion", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/");
   const backdrop = page.locator(".ambient-backdrop");
   await expect(backdrop).toHaveAttribute("aria-hidden", "true");
   await expect(backdrop).toHaveCSS("pointer-events", "none");
   await expect(backdrop).toHaveCSS("animation-name", "none");
   await expect(page.locator(".flame-backdrop")).toHaveCount(0);
-  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(28, 16, 19)");
-  await expect(page.getByRole("button", { name: "Esplora tutti", exact: true })).toHaveCSS("background-color", "rgb(247, 181, 56)");
+  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(255, 247, 246)");
+  await expect(page.getByRole("button", { name: "Esplora tutti", exact: true })).toHaveCSS("background-color", "rgb(195, 47, 39)");
   await page.getByRole("button", { name: "Match", exact: true }).click();
   await page.getByRole("button", { name: "Dettagli", exact: true }).click();
   await expect(backdrop).toBeVisible();
+});
+
+test("night theme keeps the established burgundy and gold palette", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(28, 16, 19)");
+  await expect(page.getByRole("button", { name: "Esplora tutti", exact: true })).toHaveCSS("background-color", "rgb(247, 181, 56)");
 });
 
 test("celebration respects reduced motion and disappears", async ({ page }) => {

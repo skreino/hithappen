@@ -86,8 +86,8 @@ Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 
 ### Direzione visiva consumer
 
-- Stile iOS-inspired web, palette calda approvata: `#780116`, `#F7B538`, `#DB7C26`, `#D8572A`, `#C32F27`. Fondo derivato `#1C1013`, pannelli `#342327`, testo `#FAF5F1`, secondario `#C5B4AE`; oro per le azioni principali.
-- Sfondo ambientale statico ambra/bordeaux senza fiamme. Fotografie e mappa non vengono tinte. Brevi coriandoli sulle scelte positive Match e sulla partecipazione demo; solo conferma testuale con reduced-motion, nessun abbinamento online simulato.
+- Stile iOS-inspired web adattato a `prefers-color-scheme`: giorno bianco caldo, superfici bianche, testo bordeaux e rosso `#C32F27`; notte con fondo `#1C1013`, pannelli `#342327`, testo `#FAF5F1` e oro `#F7B538`.
+- Sfondo ambientale statico adattivo senza fiamme. Fotografie e mappa non vengono tinte. Coriandoli sulle scelte positive e feedback X con scia sugli skip; solo conferma testuale con reduced-motion, nessun abbinamento online simulato.
 - Lingua italiano/inglese dalla testata e dal Profilo, persistita sul dispositivo in `hithappen:language:v1`. Tradotti UI, eventi demo, ricerca, date ed errori; identificatori e categorie di dominio restano stabili.
 - Mappa senza fila orizzontale di schede: anteprima selezionata e lista richiudibile di fallback, sincronizzate con i marker.
 - System sans, SF sui dispositivi Apple; wordmark invariato.
