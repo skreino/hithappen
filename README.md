@@ -24,7 +24,9 @@ Eventi e distanze sono dimostrativi. Preferiti e avanzamento Match vengono salva
 
 Direzione iOS-inspired con palette calda: bordeaux `#780116`, oro `#F7B538`, ambra `#DB7C26`, arancio `#D8572A`, rosso `#C32F27`. Base scura derivata `#1C1013`, pannelli opachi `#342327`, testo `#FAF5F1`, secondario `#C5B4AE`. Oro per le azioni principali, toni rossi per il fondo. Font di sistema: SF su Apple, fallback sugli altri dispositivi. Wordmark conservato, senza pannello decorativo desktop. Vetro limitato a testate e navigazione. Cinque voci: Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena oro. Ricerca solo nella testata sticky; il catalogo completo si apre con “Esplora tutti”.
 
-La fiamma AnimateIcons fornita dall’utente è adattata in SVG/CSS come filigrana non interattiva dietro alle pagine. Movimento introduttivo di 4,8 secondi, poi statico; disabilitato con `prefers-reduced-motion`. Nessuna nuova dipendenza. Fotografie e cartografia rimangono prive di filtri cromatici. Attribuzione MIT in `public/THIRD_PARTY_NOTICES.md`.
+Sfondo ambientale statico con luce ambra e bordeaux molto tenue: nessuna fiamma o simbolo dating. Fotografie e cartografia rimangono prive di filtri cromatici. Le scelte positive in Match e la partecipazione demo mostrano coriandoli brevi e una conferma non bloccante; con `prefers-reduced-motion` rimane solo la conferma testuale. Nessuna nuova dipendenza.
+
+Italiano e inglese sono selezionabili dalla testata (EN/IT) e dal Profilo. Interfaccia, eventi demo, ricerca, date e messaggi si adattano alla lingua. La preferenza è validata e salvata in `hithappen:language:v1`, separatamente dai preferiti; se lo storage non è disponibile il cambio funziona per la sessione. La mappa conserva l’anteprima selezionata; la precedente fila di schede è sostituita da una lista richiudibile, utilizzabile anche senza cartografia.
 
 ## Avvio locale
 
@@ -60,6 +62,7 @@ npm run build
 - `components/map/`, `components/navigation/`, `components/search/`, `components/ui/`: componenti di prodotto riutilizzabili;
 - `data/mock-events.ts`: fixture relative alla data corrente;
 - `lib/events/`: formattazione date, ricerca, filtri, ranking demo e stato persistente;
+- `lib/i18n/`: dizionario italiano/inglese e preferenza lingua locale;
 - `app/globals.css`: design token, responsive e temi;
 - `tests/e2e/`: test browser su 390 × 844, 320 × 568 e 1440 × 900;
 - `docs/PRODUCT_BLUEPRINT.md`: visione, MVP e piano tecnico;

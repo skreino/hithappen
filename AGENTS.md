@@ -23,7 +23,7 @@ Prima di modificare il prodotto, leggi:
 - I salvati sono accessibili dal profilo, non dalla navigazione principale.
 - La sezione giochi deve aiutare a scegliere una serata; non deve sembrare un'app di dating.
 - La selezione corrente usa vicinanza e interesse ricevuto demo; non dichiarare un algoritmo personalizzato reale.
-- Palette bordeaux/oro/ambra/arancio/rosso e font di sistema approvati. Fondo scuro caldo con fiamma discreta, animazione introduttiva limitata e reduced-motion. Match personale e preferiti persistono sul dispositivo; non creare chat o abbinamenti simulati.
+- Palette bordeaux/oro/ambra/arancio/rosso e font di sistema approvati. Fondo scuro caldo con luce ambientale statica, senza fiamme. Breve festa sulle scelte positive, rispettando reduced-motion. Match personale, preferiti e lingua italiano/inglese persistono sul dispositivo; non creare chat o abbinamenti simulati.
 - Solo locali verificati potranno pubblicare eventi reali.
 - La chat evento è riservata ai partecipanti e dovrà includere blocco, segnalazione e moderazione.
 - Mantenere il tema dark-first approvato; un eventuale tema chiaro è una fase successiva e non deve diluire la direzione nightlife.

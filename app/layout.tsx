@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { FlameBackdrop } from "@/components/ui/flame-backdrop";
+import { AmbientBackdrop } from "@/components/ui/ambient-backdrop";
+import { LocaleProvider } from "@/lib/i18n/locale-provider";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
@@ -19,5 +20,5 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="it"><body><FlameBackdrop />{children}</body></html>;
+  return <html lang="it"><body><AmbientBackdrop /><LocaleProvider>{children}</LocaleProvider></body></html>;
 }

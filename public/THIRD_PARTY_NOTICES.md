@@ -1,6 +1,6 @@
-# AnimateIcons flame
+# Historical attribution: AnimateIcons flame
 
-The decorative flame path is adapted from AnimateIcons / Lucide by Avijit Dey.
+The decorative flame used in earlier versions was adapted from AnimateIcons / Lucide by Avijit Dey. The flame has been removed from the current interface; this notice is retained for historical attribution.
 Source: https://github.com/Avijit07x/animateicons
 Adaptation: CSS animation, background scale and HitHappen palette.
 

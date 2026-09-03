@@ -1,4 +1,5 @@
 "use client";
+import { useLocale } from "@/lib/i18n/locale-provider";
 
 import { useEffect, useRef, useState } from "react";
 import type { LayerGroup, Map as LeafletMap } from "leaflet";
@@ -7,6 +8,7 @@ import type { EventItem } from "@/data/mock-events";
 type Coordinates = { latitude: number; longitude: number };
 
 export function EventMap({ events, selectedId, onSelect, compact = false, userLocation }: { events: EventItem[]; selectedId?: string; onSelect: (event: EventItem) => void; compact?: boolean; userLocation?: Coordinates | null }) {
+  const { t } = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const eventLayerRef = useRef<LayerGroup | null>(null);
@@ -36,7 +38,7 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
         maxZoom: 19,
       }).on("tileerror", () => { if (!cancelled) setError("Cartografia non disponibile. La lista eventi resta utilizzabile."); })
         .on("load", () => window.clearTimeout(timeout)).addTo(map);
-      if (!compact) leaflet.control.zoom({ position: "topright", zoomInTitle: "Aumenta zoom", zoomOutTitle: "Riduci zoom" }).addTo(map);
+      if (!compact) leaflet.control.zoom({ position: "topright", zoomInTitle: t("Aumenta zoom"), zoomOutTitle: t("Riduci zoom") }).addTo(map);
       mapRef.current = map;
       eventLayerRef.current = leaflet.layerGroup().addTo(map);
       userLayerRef.current = leaflet.layerGroup().addTo(map);
@@ -54,7 +56,7 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
       eventLayerRef.current = null;
       userLayerRef.current = null;
     };
-  }, [compact, attempt]);
+  }, [compact, attempt, t]);
 
   useEffect(() => {
     if (!ready || !mapRef.current || !eventLayerRef.current) return;
@@ -66,10 +68,10 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
       const points: [number, number][] = [];
       events.forEach((event) => {
         points.push([event.latitude, event.longitude]);
-        const price = event.price === 0 ? "Gratis" : `${event.price}€`;
+        const price = event.price === 0 ? t("Gratis") : `${event.price}€`;
         const marker = leaflet.marker([event.latitude, event.longitude], {
-          title: event.title,
-          alt: `${event.title}, ${event.neighborhood}`,
+          title: t(event.title),
+          alt: `${t(event.title)}, ${event.neighborhood}`,
           icon: leaflet.divIcon({
             className: `leaflet-event-icon ${event.id === selectedId ? "is-selected" : ""}`,
             html: `<span>${price}</span>`,
@@ -78,7 +80,7 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
           }),
         }).addTo(layer);
         marker.on("click", () => onSelect(event));
-        marker.getElement()?.setAttribute("aria-label", `${event.title}, ${price}`);
+        marker.getElement()?.setAttribute("aria-label", `${t(event.title)}, ${price}`);
         marker.getElement()?.setAttribute("aria-pressed", String(event.id === selectedId));
       });
 
@@ -86,7 +88,7 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
       else if (!selectedId && points.length > 1) mapRef.current.fitBounds(points, { padding: [54, 54], maxZoom: 13 });
     });
     return () => { cancelled = true; };
-  }, [events, onSelect, ready, selectedId, compact]);
+  }, [events, onSelect, ready, selectedId, compact, t]);
 
   useEffect(() => {
     if (!ready || !selectedId || !mapRef.current) return;
@@ -103,11 +105,11 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
       if (!userLocation) return;
       const userMarker = leaflet.circleMarker([userLocation.latitude, userLocation.longitude], { radius: 9, weight: 4, color: "#ffffff", fillColor: "#2563eb", fillOpacity: 1, className: "user-location-marker" }).addTo(userLayerRef.current);
       userMarker.getElement()?.setAttribute("role", "img");
-      userMarker.getElement()?.setAttribute("aria-label", "La tua posizione");
+      userMarker.getElement()?.setAttribute("aria-label", t("La tua posizione"));
       mapRef.current.flyTo([userLocation.latitude, userLocation.longitude], 14, { duration: .7, animate: !window.matchMedia("(prefers-reduced-motion: reduce)").matches });
     });
     return () => { cancelled = true; };
-  }, [ready, userLocation]);
+  }, [ready, userLocation, t]);
 
-  return <div className={`event-map ${compact ? "event-map--compact" : ""}`}><div ref={containerRef} className="leaflet-map-canvas" aria-label="Mappa interattiva degli eventi" />{!ready && !error && <div className="map-loading" aria-live="polite">Carico la mappa…</div>}{error && <div className="map-error" role="status">{error}<button onClick={() => { setReady(false); setError(""); setAttempt(value => value + 1); }}>Riprova</button></div>}</div>;
+  return <div className={`event-map ${compact ? "event-map--compact" : ""}`}><div ref={containerRef} className="leaflet-map-canvas" aria-label={t("Mappa interattiva degli eventi")} />{!ready && !error && <div className="map-loading" aria-live="polite">{t("Carico la mappa…")}</div>}{error && <div className="map-error" role="status">{t(error)}<button onClick={() => { setReady(false); setError(""); setAttempt(value => value + 1); }}>{t("Riprova")}</button></div>}</div>;
 }

@@ -1,5 +1,6 @@
 import type { EventCategory, EventItem } from "@/data/mock-events";
 import { isThisWeekend, isToday, isTomorrow, isUpcoming } from "@/lib/events/date";
+import { translate, type Language } from "@/lib/i18n/messages";
 
 export type TimeFilter = "all" | "tonight" | "tomorrow" | "weekend";
 export type EventFilters = { time: TimeFilter; maxDistance: number; category: EventCategory | "Tutte"; maxPrice: number | null };
@@ -18,8 +19,8 @@ export function filterEvents(events: EventItem[], filters: EventFilters, now = n
     return true;
   });
 }
-export function searchEvents(events: EventItem[], query: string) {
+export function searchEvents(events: EventItem[], query: string, language: Language = "it") {
   const normalized = query.trim().toLocaleLowerCase("it");
   if (!normalized) return events;
-  return events.filter((event) => [event.title,event.venue,event.category,event.neighborhood,...event.tags].some((value) => value.toLocaleLowerCase("it").includes(normalized)));
+  return events.filter((event) => [event.title,event.venue,event.category,event.neighborhood,...event.tags].some((value) => value.toLocaleLowerCase("it").includes(normalized) || translate(value, language).toLocaleLowerCase(language).includes(normalized)));
 }

@@ -72,11 +72,13 @@ test("map remains usable when tiles fail; selection, filters and empty state", a
   await ready(page); await tab(page,"Mappa");
   await expect(page.locator(".map-error")).toBeVisible();
   await expect(page.getByRole("link",{name:"OpenStreetMap",exact:true})).toHaveAttribute("href","https://www.openstreetmap.org/copyright");
-  await page.getByRole("button",{name:"Live indie al Biko Barona, 2,4 km",exact:true}).click();
+  await expect(page.locator(".map-event-rail")).toHaveCount(0);
+  await page.locator(".map-event-list summary").click();
+  await page.getByRole("button",{name:"Live indie al Biko Barona · 2,4 km",exact:true}).click();
   await expect(page.locator(".map-preview")).toContainText("Live indie al Biko");
   await expect(page.getByRole("button",{name:"Live indie al Biko, 15€",exact:true})).toHaveAttribute("aria-pressed","true");
   await page.getByRole("button",{name:"Musica",exact:true}).click();
-  await expect(page.locator(".map-event-rail button")).toHaveCount(5);
+  await expect(page.locator(".map-event-options button")).toHaveCount(5);
   await page.getByRole("button",{name:"Filtri",exact:true}).click();
   await page.getByRole("slider",{name:"Distanza massima"}).press("Home");
   await page.getByRole("button",{name:"Mostra 0 eventi",exact:true}).click();
@@ -87,7 +89,7 @@ test("denied geolocation leaves events available", async ({page}) => {
   await ready(page); await tab(page,"Mappa");
   await page.getByRole("button",{name:"Centra sulla mia posizione"}).click();
   await expect(page.locator(".location-status")).toContainText("Posizione negata");
-  await expect(page.locator(".map-event-rail button")).toHaveCount(12);
+  await expect(page.locator(".map-event-options button")).toHaveCount(12);
 });
 test("synthetic location callback draws the user marker without browser permissions", async ({page}) => {
   await page.addInitScript(()=>Object.defineProperty(navigator,"geolocation",{value:{getCurrentPosition:(success:(value:{coords:{latitude:number;longitude:number}})=>void)=>success({coords:{latitude:45.4642,longitude:9.19}})}}));

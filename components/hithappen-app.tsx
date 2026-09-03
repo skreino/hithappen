@@ -1,4 +1,5 @@
 "use client";
+import { useLocale } from "@/lib/i18n/locale-provider";
 import { useEffect, useMemo, useState } from "react";
 import { SlidersHorizontal } from "@phosphor-icons/react";
 import { mockEvents, type EventItem } from "@/data/mock-events";
@@ -17,6 +18,7 @@ import { ProfileView } from "@/features/profile/profile-view";
 import { SearchOverlay } from "@/features/search/search-overlay";
 
 export function HitHappenApp() {
+  const { t, language } = useLocale();
   const [tab, setTab] = useState<AppTab>("discover");
   const [catalogue, setCatalogue] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
@@ -29,7 +31,7 @@ export function HitHappenApp() {
   const [overlay, setOverlay] = useState<"search" | "filters" | null>(null);
   const [query, setQuery] = useState("");
   const filteredEvents = useMemo(() => filterEvents(mockEvents, filters), [filters]);
-  const results = useMemo(() => searchEvents(filteredEvents, query), [filteredEvents, query]);
+  const results = useMemo(() => searchEvents(filteredEvents, query, language), [filteredEvents, query, language]);
   const saved = useMemo(() => new Set(device.saved), [device.saved]);
   const dispatch = (action: DeviceAction) => setDevice(current => deviceReducer(current, action));
   useEffect(() => {
@@ -51,8 +53,8 @@ export function HitHappenApp() {
   if (selectedEvent) return <EventDetailView event={selectedEvent} saved={saved.has(selectedEvent.id)} attending={attending.has(selectedEvent.id)} onBack={() => setSelectedEvent(null)} onSave={() => dispatch({ type: "save", id: selectedEvent.id })} onAttend={() => setAttending(current => { const next = new Set(current); if (next.has(selectedEvent.id)) next.delete(selectedEvent.id); else next.add(selectedEvent.id); return next; })} />;
   return <div className="app-shell" data-ready={hydrated}><div className="app-frame" inert={overlay ? true : undefined}>
     <AppHeader fullSearch={tab === "discover"} query={query} onQuery={value => { setQuery(value); if (value) setCatalogue(true); }} onSearch={() => setOverlay("search")} onBack={tab === "discover" && catalogue ? () => { setCatalogue(false); setQuery(""); } : undefined} />
-    {storageMessage && <p className="storage-message" role="status">{storageMessage}</p>}
-    {tab === "discover" && (catalogue ? <main className="view catalogue-view"><div className="section-heading"><h1>Tutti gli eventi</h1><button onClick={() => setOverlay("filters")}><SlidersHorizontal size={20} />Filtri</button></div><p className="results-count" role="status">{results.length} eventi · dati demo</p>{results.length ? <div className="editorial-list">{results.map(event => <CompactEventRow key={event.id} event={event} onOpen={() => openEvent(event)} />)}</div> : <div className="empty-copy"><h2>Nessun evento trovato</h2><p>Cambia ricerca o allarga i filtri.</p><button className="secondary-cta" onClick={() => { setFilters(defaultFilters); setQuery(""); }}>Azzera ricerca e filtri</button></div>}</main> : <DiscoverView events={mockEvents} saved={saved} onOpen={openEvent} onSave={id => dispatch({ type: "save", id })} onExplore={() => { setCatalogue(true); window.scrollTo({ top: 0 }); }} />)}
+    {storageMessage && <p className="storage-message" role="status">{t(storageMessage)}</p>}
+    {tab === "discover" && (catalogue ? <main className="view catalogue-view"><div className="section-heading"><h1>{t("Tutti gli eventi")}</h1><button onClick={() => setOverlay("filters")}><SlidersHorizontal size={20} />{t("Filtri")}</button></div><p className="results-count" role="status">{results.length} {t("eventi · dati demo")}</p>{results.length ? <div className="editorial-list">{results.map(event => <CompactEventRow key={event.id} event={event} onOpen={() => openEvent(event)} />)}</div> : <div className="empty-copy"><h2>{t("Nessun evento trovato")}</h2><p>{t("Cambia ricerca o allarga i filtri.")}</p><button className="secondary-cta" onClick={() => { setFilters(defaultFilters); setQuery(""); }}>{t("Azzera ricerca e filtri")}</button></div>}</main> : <DiscoverView events={mockEvents} saved={saved} onOpen={openEvent} onSave={id => dispatch({ type: "save", id })} onExplore={() => { setCatalogue(true); window.scrollTo({ top: 0 }); }} />)}
     {tab === "match" && <MatchView events={mockEvents} history={device.history} saved={saved} ready={hydrated} onOpen={openEvent} onAction={dispatch} onProfile={() => switchTab("profile")} />}
     {tab === "map" && <MapView events={filteredEvents} selected={mapSelection} onSelect={setMapSelection} onOpen={openEvent} onFilters={() => setOverlay("filters")} />}
     {tab === "inbox" && <InboxView />}

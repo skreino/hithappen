@@ -1,5 +1,5 @@
 import { addDays, format, isSameDay, isWithinInterval, nextFriday, nextSunday, set } from "date-fns";
-import { it } from "date-fns/locale";
+import { enGB, it } from "date-fns/locale";
 
 export function createRelativeDate(daysFromToday: number, hour: number, minute = 0) {
   const target = addDays(new Date(), daysFromToday);
@@ -24,16 +24,16 @@ export function isUpcoming(value: string, now = new Date()) {
   return new Date(value).getTime() >= now.getTime() - 1000 * 60 * 60 * 3;
 }
 
-export function formatEventDate(value: string, now = new Date()) {
-  if (isToday(value, now)) return "Oggi";
-  if (isTomorrow(value, now)) return "Domani";
-  return format(new Date(value), "EEE d MMM", { locale: it });
+export function formatEventDate(value: string, now = new Date(), language: "it" | "en" = "it") {
+  if (isToday(value, now)) return language === "en" ? "Today" : "Oggi";
+  if (isTomorrow(value, now)) return language === "en" ? "Tomorrow" : "Domani";
+  return format(new Date(value), "EEE d MMM", { locale: language === "en" ? enGB : it });
 }
 
 export function formatEventTime(value: string) {
   return format(new Date(value), "HH:mm", { locale: it });
 }
 
-export function formatRelativeEventTime(value: string, now = new Date()) {
-  return `${formatEventDate(value, now)} · ${formatEventTime(value)}`;
+export function formatRelativeEventTime(value: string, now = new Date(), language: "it" | "en" = "it") {
+  return `${formatEventDate(value, now, language)} · ${formatEventTime(value)}`;
 }
