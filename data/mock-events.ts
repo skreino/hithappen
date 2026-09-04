@@ -21,9 +21,13 @@ export type EventItem = {
   attendeeCount: number;
   isFeatured: boolean;
   tags: string[];
+  imageAlt?: string;
+  suggestionReason?: "nearby" | "interest" | "popular";
+  ticketStatus?: "unavailable-demo" | "external";
 };
 
-const image = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=84`;
+const localImages = ["/events/rooftop.png", "/events/live.png", "/events/club.png"];
+const image = (id: string) => localImages[[...id].reduce((total, char) => total + char.charCodeAt(0), 0) % localImages.length];
 const currentDay = new Date().getDay();
 const nextWeekendFriday = currentDay === 6 ? 0 : currentDay === 0 ? 5 : 5 - currentDay;
 
@@ -40,4 +44,14 @@ export const mockEvents: EventItem[] = [
   { id:"weekend-brunch", title:"Brunch lungo in cascina", venue:"Cascina Nascosta", category:"Food", description:"Piatti di stagione, tavoli nel verde e musica selezionata con calma per tutta la domenica.", image:image("photo-1515003197210-e0cd71810b5f"), startAt:createRelativeDate(nextWeekendFriday + 2,12,0), endAt:createRelativeDate(nextWeekendFriday + 2,16,30), latitude:45.4711, longitude:9.1747, neighborhood:"Sempione", city:"Milano", distanceKm:1.5, price:22, currency:"EUR", attendeeCount:19, isFeatured:false, tags:["Brunch","Giardino"] },
   { id:"weekend-darsena", title:"Darsena al mattino", venue:"Darsena", category:"Outdoor", description:"Camminata urbana guidata lungo l’acqua con una sosta finale per il caffè.", image:image("photo-1500530855697-b586d89ba3ee"), startAt:createRelativeDate(nextWeekendFriday + 2,10,0), endAt:createRelativeDate(nextWeekendFriday + 2,12,0), latitude:45.4521, longitude:9.1752, neighborhood:"Darsena", city:"Milano", distanceKm:1.6, price:0, currency:"EUR", attendeeCount:16, isFeatured:false, tags:["Walk","Città"] },
   { id:"next-week-disco", title:"Disco italiana", venue:"Santeria Toscana 31", category:"Club", description:"Una notte dedicata alla disco italiana, tra classici, nuove produzioni e pista piena.", image:image("photo-1492684223066-81342ee5ff30"), startAt:createRelativeDate(7,22,30), endAt:createRelativeDate(8,3,0), latitude:45.4468, longitude:9.2077, neighborhood:"Ticinese", city:"Milano", distanceKm:2.8, price:16, currency:"EUR", attendeeCount:47, isFeatured:false, tags:["Disco","Italiano"] },
+  { id:"monza-corte", title:"Corte sonora", venue:"Arengario di Monza", category:"Musica live", description:"Live acustico serale nel centro di Monza, con piccoli produttori e tavoli condivisi.", image:image("monza-corte"), startAt:createRelativeDate(0,20,30), endAt:createRelativeDate(0,23,30), latitude:45.5845, longitude:9.2745, neighborhood:"Centro", city:"Monza", distanceKm:13.8, price:9, currency:"EUR", attendeeCount:29, isFeatured:false, tags:["Live","Outdoor"] },
+  { id:"monza-aperitivo", title:"Aperitivo nel giardino", venue:"Mulino Colombo", category:"Aperitivo", description:"Cocktail stagionali e selezione downtempo in un giardino nascosto lungo il Lambro.", image:image("monza-aperitivo"), startAt:createRelativeDate(1,19,0), endAt:createRelativeDate(1,23,0), latitude:45.5881, longitude:9.2802, neighborhood:"San Gerardo", city:"Monza", distanceKm:14.2, price:14, currency:"EUR", attendeeCount:21, isFeatured:false, tags:["Cocktail","Giardino"] },
+  { id:"monza-villa", title:"Cinema alla Villa Reale", venue:"Villa Reale", category:"Cultura", description:"Proiezione all'aperto nel parco con introduzione del curatore e cuffie incluse.", image:image("monza-villa"), startAt:createRelativeDate(nextWeekendFriday + 1,21,0), endAt:createRelativeDate(nextWeekendFriday + 1,23,30), latitude:45.593, longitude:9.2734, neighborhood:"Parco", city:"Monza", distanceKm:14.7, price:7, currency:"EUR", attendeeCount:44, isFeatured:false, tags:["Cinema","Outdoor"] },
+  { id:"monza-track", title:"After race social club", venue:"Autodromo Nazionale", category:"Club", description:"DJ set, visual e area social dopo una giornata nel parco di Monza.", image:image("monza-track"), startAt:createRelativeDate(nextWeekendFriday + 2,18,30), endAt:createRelativeDate(nextWeekendFriday + 2,23,0), latitude:45.6206, longitude:9.2811, neighborhood:"Autodromo", city:"Monza", distanceKm:17.1, price:20, currency:"EUR", attendeeCount:56, isFeatured:false, tags:["DJ set","Sociale"] },
 ];
+
+for (const event of mockEvents) {
+  event.imageAlt ??= `${event.title} a ${event.venue}`;
+  event.suggestionReason ??= event.distanceKm <= 2 ? "nearby" : event.attendeeCount >= 40 ? "popular" : "interest";
+  event.ticketStatus ??= "unavailable-demo";
+}

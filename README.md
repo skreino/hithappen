@@ -6,17 +6,21 @@ HitHappen è un prototipo web mobile-first per scoprire eventi, serate e occasio
 
 Questa repository contiene il prototipo interattivo attualmente pubblicato su [hithappen.vercel.app](https://hithappen.vercel.app).
 
-Eventi e distanze sono dimostrativi. Preferiti e avanzamento Match vengono salvati realmente sul dispositivo (localStorage versionato, senza dati personali); non sono sincronizzati online. Partecipazione solo demo; Inbox esplicitamente non attiva. Backend, autenticazione e notifiche non sono collegati.
+Eventi e distanze sono dimostrativi. Onboarding, profilo, preferiti, avanzamento Match, partecipazioni, gruppi e messaggi demo vengono salvati sul dispositivo in uno storage locale versionato; non sono sincronizzati online. Backend, autenticazione e notifiche reali non sono collegati.
 
 ## Funzioni presenti
 
-- Home essenziale con carosello manuale di tre serate e tre proposte non duplicate;
+- onboarding saltatile con interessi, consenso posizione e fallback Milano/Monza;
+- Home essenziale con una proposta dominante, carosello manuale e tre alternative non duplicate;
 - dettaglio evento con prezzo, distanza e partecipanti;
 - eventi salvati;
 - Match personale con swipe, pulsanti equivalenti, dettagli, annulla e riepilogo;
 - ricerca e filtri essenziali;
-- profilo demo con tutti i preferiti del dispositivo;
-- mappa Leaflet/OpenStreetMap, marker geografici, lista e anteprima sincronizzate, zoom e geolocalizzazione con gestione errori;
+- partecipazione separata dall'adesione volontaria al gruppo evento;
+- Inbox locale con gruppi evento, una conversazione demo preesistente e messaggi persistenti sul dispositivo;
+- profilo demo modificabile con preferiti, privacy e preferenze notifiche locali;
+- mappa Leaflet/OpenStreetMap con clustering Milano/Monza, marker, lista e anteprima sincronizzate, zoom e gestione errori;
+- PWA installabile con manifest e service worker versionato;
 - tema dark-first coerente con il mondo nightlife;
 - navigazione mobile a cinque azioni con Mappa centrale.
 
@@ -61,7 +65,8 @@ npm run build
 - `components/events/`: sistema condiviso delle card evento;
 - `components/map/`, `components/navigation/`, `components/search/`, `components/ui/`: componenti di prodotto riutilizzabili;
 - `data/mock-events.ts`: fixture relative alla data corrente;
-- `lib/events/`: formattazione date, ricerca, filtri, ranking demo e stato persistente;
+- `lib/events/`: formattazione date, ricerca, filtri, ranking demo e stato persistente v2 con migrazione v1;
+- `lib/repositories/`: repository mock asincroni sostituibili;
 - `lib/i18n/`: dizionario italiano/inglese e preferenza lingua locale;
 - `app/globals.css`: design token, responsive e temi;
 - `tests/e2e/`: test browser su 390 × 844, 320 × 568 e 1440 × 900;

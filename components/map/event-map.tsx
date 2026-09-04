@@ -14,6 +14,7 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
   const eventLayerRef = useRef<LayerGroup | null>(null);
   const userLayerRef = useRef<LayerGroup | null>(null);
   const initialEventRef = useRef(events[0]);
+  const initialSelectionRef = useRef(true);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
@@ -26,12 +27,12 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
 
     void import("leaflet").then((leaflet) => {
       if (cancelled || !containerRef.current) return;
-      const initial = initialEventRef.current ?? { latitude: 45.4642, longitude: 9.19 };
+      const initial = initialEventRef.current ?? { latitude: 45.53, longitude: 9.23 };
       const map = leaflet.map(containerRef.current, {
         zoomControl: false,
         attributionControl: true,
         preferCanvas: false,
-      }).setView([initial.latitude, initial.longitude], compact ? 14 : 12);
+      }).setView(compact ? [initial.latitude, initial.longitude] : [45.53, 9.23], compact ? 14 : 10);
 
       leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>',
@@ -63,35 +64,40 @@ export function EventMap({ events, selectedId, onSelect, compact = false, userLo
     let cancelled = false;
     void import("leaflet").then((leaflet) => {
       if (cancelled || !mapRef.current || !eventLayerRef.current) return;
-      eventLayerRef.current.clearLayers();
       const layer = eventLayerRef.current;
-      const points: [number, number][] = [];
-      events.forEach((event) => {
-        points.push([event.latitude, event.longitude]);
-        const price = event.price === 0 ? t("Gratis") : `${event.price}€`;
-        const marker = leaflet.marker([event.latitude, event.longitude], {
-          title: t(event.title),
-          alt: `${t(event.title)}, ${event.neighborhood}`,
-          icon: leaflet.divIcon({
-            className: `leaflet-event-icon ${event.id === selectedId ? "is-selected" : ""}`,
-            html: `<span>${price}</span>`,
-            iconSize: [54, 48],
-            iconAnchor: [27, 38],
-          }),
-        }).addTo(layer);
-        marker.on("click", () => onSelect(event));
-        marker.getElement()?.setAttribute("aria-label", `${t(event.title)}, ${price}`);
-        marker.getElement()?.setAttribute("aria-pressed", String(event.id === selectedId));
-      });
-
-      if (compact && points[0]) mapRef.current.setView(points[0], 14, { animate: false });
-      else if (!selectedId && points.length > 1) mapRef.current.fitBounds(points, { padding: [54, 54], maxZoom: 13 });
+      const renderMarkers = () => {
+        if (!mapRef.current) return;
+        layer.clearLayers();
+        if (!compact && mapRef.current.getZoom() <= 11 && events.length > 4) {
+          const groups = new Map<string, EventItem[]>();
+          events.forEach(event => groups.set(event.city, [...(groups.get(event.city) ?? []), event]));
+          groups.forEach((group, city) => {
+            const latitude = group.reduce((sum, item) => sum + item.latitude, 0) / group.length;
+            const longitude = group.reduce((sum, item) => sum + item.longitude, 0) / group.length;
+            const marker = leaflet.marker([latitude, longitude], { title: `${group.length} ${t("eventi")} · ${city}`, icon: leaflet.divIcon({ className: "leaflet-cluster-icon", html: `<span>${group.length}</span>`, iconSize: [52,52], iconAnchor: [26,26] }) }).addTo(layer);
+            marker.on("click", () => mapRef.current?.setView([latitude, longitude], 13));
+          });
+          return;
+        }
+        events.forEach((event) => {
+          const price = event.price === 0 ? t("Gratis") : `${event.price}€`;
+          const marker = leaflet.marker([event.latitude, event.longitude], { title: t(event.title), alt: `${t(event.title)}, ${event.neighborhood}`, icon: leaflet.divIcon({ className: `leaflet-event-icon ${event.id === selectedId ? "is-selected" : ""}`, html: `<span>${price}</span>`, iconSize: [54,48], iconAnchor: [27,38] }) }).addTo(layer);
+          marker.on("click", () => onSelect(event));
+          marker.getElement()?.setAttribute("aria-label", `${t(event.title)}, ${price}`);
+          marker.getElement()?.setAttribute("aria-pressed", String(event.id === selectedId));
+        });
+      };
+      renderMarkers();
+      mapRef.current.on("zoomend", renderMarkers);
+      if (compact && events[0]) mapRef.current.setView([events[0].latitude, events[0].longitude], 14, { animate: false });
+      return () => mapRef.current?.off("zoomend", renderMarkers);
     });
     return () => { cancelled = true; };
   }, [events, onSelect, ready, selectedId, compact, t]);
 
   useEffect(() => {
     if (!ready || !selectedId || !mapRef.current) return;
+    if (initialSelectionRef.current) { initialSelectionRef.current = false; return; }
     const selected = events.find((event) => event.id === selectedId);
     if (selected && !compact) mapRef.current.flyTo([selected.latitude, selected.longitude], Math.max(mapRef.current.getZoom(), 13), { duration: .55, animate: !window.matchMedia("(prefers-reduced-motion: reduce)").matches });
   }, [compact, events, ready, selectedId]);

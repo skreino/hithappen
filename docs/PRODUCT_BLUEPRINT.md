@@ -1,10 +1,10 @@
 # HitHappen — Product Blueprint v0.1
 
-Aggiornato: 2 settembre 2026
+Aggiornato: 3 settembre 2026
 
 ## Stato implementato — consumer web
 
-La versione attuale usa dati demo, senza backend. Home con carosello manuale (tre serate, ranking deterministico vicinanza/interesse), tre proposte distinte e catalogo completo filtrabile. Match personale valuta tutti gli eventi: swipe o pulsanti, annulla, dettaglio senza reset, riepilogo. Preferiti e cronologia persistono con schema `hithappen:personal:v1`; nessun dato personale viene salvato. Leaflet mostra coordinate reali su OpenStreetMap con zoom, selezione marker/lista/anteprima, posizione opzionale e fallback agli eventi se le tile falliscono. Distanze e partecipazioni restano demo. Inbox non simula messaggi. Le sezioni successive descrivono anche funzionalità future, non tutte già operative.
+La versione attuale usa dati demo, senza backend. Include onboarding, Home editoriale, Match eventi, dettaglio, partecipazione e adesione al gruppo come consensi separati, Inbox locale, Profilo modificabile e mappa Milano/Monza con clustering e fallback. Lo schema `hithappen:personal:v2` migra preferiti e cronologia della v1 e conserva localmente profilo, preferenze, partecipazioni, gruppi e messaggi demo. Repository asincroni mock separano le fixture dalle schermate. Manifest e service worker rendono il prototipo installabile come PWA.
 
 ## 1. Visione
 
@@ -61,11 +61,10 @@ Approva i locali, gestisce gli eventi inseriti manualmente, modera segnalazioni 
 
 ### Onboarding
 
-1. Registrazione o accesso.
-2. Scelta di generi musicali e interessi.
-3. Selezione della zona preferita e del raggio di distanza.
-4. Creazione del profilo.
-5. Apertura del feed personalizzato.
+1. Proposta di valore.
+2. Spiegazione di Scopri e Match.
+3. Spiegazione di gruppi, consenso e privacy.
+4. Scelta di 3–5 interessi e richiesta esplicita della posizione, con fallback Milano/Monza.
 
 ### Home
 
@@ -108,10 +107,11 @@ Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 
 ### Partecipazione e chat
 
-- Selezionando “Partecipo”, l'utente entra nella chat dedicata all'evento.
-- Rimuovendo la partecipazione, perde l'accesso alla chat.
+- Selezionando “Partecipo”, l'utente registra soltanto la presenza demo.
+- L'ingresso nel gruppo richiede un secondo consenso esplicito e rende visibile solo il profilo essenziale.
+- Rimuovendo la partecipazione, perde l'accesso al gruppo locale.
 - La chat resta legata a un singolo evento.
-- Sono presenti blocco utente, segnalazione e moderazione automatica.
+- Blocco, segnalazione e moderazione restano requisiti per il futuro backend, non funzioni simulate.
 - La chat viene archiviata dopo l'evento secondo una finestra temporale da definire.
 
 ### Profilo utente

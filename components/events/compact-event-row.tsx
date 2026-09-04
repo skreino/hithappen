@@ -6,5 +6,5 @@ import { EventMetadata, formatPrice } from "./event-metadata";
 
 export function CompactEventRow({ event, onOpen }: { event: EventItem; onOpen: () => void }) {
   const { t, language } = useLocale();
-  return <button type="button" className="compact-event" onClick={onOpen}><img src={event.image} alt="" /><span><strong>{t(event.title)}</strong><EventMetadata event={event} compact /><b>{formatPrice(event, language)}</b></span><CaretRight size={18} /></button>;
+  return <button type="button" className="compact-event" onClick={onOpen}><img src={event.image} alt={t(event.imageAlt ?? event.title)} loading="lazy" width="136" height="152" /><span><strong>{t(event.title)}</strong><EventMetadata event={event} compact /><b>{formatPrice(event, language)}</b></span><CaretRight size={18} /></button>;
 }

@@ -1,6 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
 
 async function ready(page: Page) {
+  await page.addInitScript(() => {
+    if (!localStorage.getItem("hithappen:personal:v2")) {
+      localStorage.setItem("hithappen:personal:v2", JSON.stringify({ version: 2, saved: ["biko-live"], history: [], onboarding: { completed: true, step: 3, locationConsent: "unknown" } }));
+    }
+  });
   await page.goto("/");
   await expect(page.locator(".app-shell")).toHaveAttribute("data-ready","true");
 }
@@ -16,7 +21,7 @@ test("Home carousel, unique recommendations, catalogue and sticky search", async
   await expect(page.getByRole("button",{name:"Mostra serata 2",exact:true})).toHaveAttribute("aria-pressed","true");
   await expect.poll(() => page.locator(".hero-carousel").evaluate(e=>e.scrollLeft)).toBeGreaterThan(100);
   await page.getByRole("button",{name:"Esplora tutti",exact:true}).click();
-  await expect(page.locator(".catalogue-view .compact-event")).toHaveCount(12);
+  await expect(page.locator(".catalogue-view .compact-event")).toHaveCount(16);
   await page.getByRole("searchbox").fill("biko");
   await expect(page.locator(".catalogue-view .compact-event")).toHaveCount(1);
   await page.getByRole("button",{name:"Cancella ricerca"}).click();
@@ -46,7 +51,7 @@ test("Match likes, detail, reload, undo and full deck", async ({page}) => {
   await page.getByRole("button",{name:"Annulla ultima scelta"}).click();
   await expect(page.getByRole("heading",{name:"Rooftop al tramonto",exact:true})).toBeVisible();
   await expect(page.getByRole("button",{name:"Salva evento",exact:true})).toHaveAttribute("aria-pressed","false");
-  for(let index=0;index<12;index++) await page.getByRole("button",{name:index===0?"Mi interessa":"Passa",exact:true}).click();
+  for(let index=0;index<16;index++) await page.getByRole("button",{name:index===0?"Mi interessa":"Passa",exact:true}).click();
   await expect(page.getByRole("heading",{name:"Hai trovato le tue serate.",exact:true})).toBeVisible();
   await page.getByRole("button",{name:"Vedi salvati",exact:true}).click();
   await expect(page.getByRole("heading",{name:"I tuoi salvati · 2",exact:true})).toBeVisible();
@@ -78,7 +83,7 @@ test("map remains usable when tiles fail; selection, filters and empty state", a
   await expect(page.locator(".map-preview")).toContainText("Live indie al Biko");
   await expect(page.getByRole("button",{name:"Live indie al Biko, 15€",exact:true})).toHaveAttribute("aria-pressed","true");
   await page.getByRole("button",{name:"Musica",exact:true}).click();
-  await expect(page.locator(".map-event-options button")).toHaveCount(5);
+  await expect(page.locator(".map-event-options button")).toHaveCount(7);
   await page.getByRole("button",{name:"Filtri",exact:true}).click();
   await page.getByRole("slider",{name:"Distanza massima"}).press("Home");
   await page.getByRole("button",{name:"Mostra 0 eventi",exact:true}).click();
@@ -89,7 +94,7 @@ test("denied geolocation leaves events available", async ({page}) => {
   await ready(page); await tab(page,"Mappa");
   await page.getByRole("button",{name:"Centra sulla mia posizione"}).click();
   await expect(page.locator(".location-status")).toContainText("Posizione negata");
-  await expect(page.locator(".map-event-options button")).toHaveCount(12);
+  await expect(page.locator(".map-event-options button")).toHaveCount(16);
 });
 test("synthetic location callback draws the user marker without browser permissions", async ({page}) => {
   await page.addInitScript(()=>Object.defineProperty(navigator,"geolocation",{value:{getCurrentPosition:(success:(value:{coords:{latitude:number;longitude:number}})=>void)=>success({coords:{latitude:45.4642,longitude:9.19}})}}));

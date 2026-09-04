@@ -26,7 +26,7 @@ Prima di modificare il prodotto, leggi:
 - Tema automatico di sistema: giorno bianco caldo/rosso, notte con la palette bordeaux/oro approvata. Luce ambientale statica, senza fiamme. Festa sulle scelte positive e feedback X sugli skip, rispettando reduced-motion. Match personale, preferiti e lingua persistono sul dispositivo; non creare chat o abbinamenti simulati.
 - Solo locali verificati potranno pubblicare eventi reali.
 - La chat evento è riservata ai partecipanti e dovrà includere blocco, segnalazione e moderazione.
-- Mantenere il tema dark-first approvato; un eventuale tema chiaro è una fase successiva e non deve diluire la direzione nightlife.
+- Mantenere i due temi automatici approvati: giorno bianco caldo/rosso e notte bordeaux/oro, con identica gerarchia.
 - L'area iniziale è Milano e Monza Brianza.
 
 ## Regole tecniche

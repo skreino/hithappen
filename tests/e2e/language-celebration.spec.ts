@@ -1,6 +1,11 @@
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    if (!localStorage.getItem("hithappen:personal:v2")) {
+      localStorage.setItem("hithappen:personal:v2", JSON.stringify({ version: 2, saved: ["biko-live"], history: [], onboarding: { completed: true, step: 3, locationConsent: "unknown" } }));
+    }
+  });
   await page.goto("/");
   await expect(page.locator(".app-shell")).toHaveAttribute("data-ready", "true");
 });
@@ -36,17 +41,18 @@ test("English covers search, filters and profile, persists, and keeps Match choi
 
 test("map markers survive language changes and music filtering", async ({ page }) => {
   await page.getByRole("button", { name: "Mappa", exact: true }).click();
-  await expect(page.locator(".leaflet-event-icon")).toHaveCount(12);
+  await expect(page.locator(".leaflet-cluster-icon")).toHaveCount(2);
   await expect(page.locator(".map-event-list")).not.toHaveAttribute("open", "");
   await page.getByRole("button", { name: "Switch to English" }).click();
-  await expect(page.locator(".leaflet-event-icon")).toHaveCount(12);
+  await expect(page.locator(".leaflet-cluster-icon")).toHaveCount(2);
   await page.getByRole("button", { name: "Music", exact: true }).click();
-  await expect(page.locator(".leaflet-event-icon")).toHaveCount(5);
+  await expect(page.locator(".leaflet-event-icon")).toHaveCount(7);
   await expect(page.locator(".map-preview")).toContainText("Indie live at Biko");
   await page.locator(".map-event-list summary").click();
-  await expect(page.locator(".map-event-options button")).toHaveCount(5);
+  await expect(page.locator(".map-event-options button")).toHaveCount(7);
   await page.getByRole("button", { name: "Passa a Italiano" }).click();
-  await expect(page.locator(".leaflet-event-icon")).toHaveCount(5);
+  await expect(page.locator(".leaflet-cluster-icon")).toHaveCount(2);
+  await expect(page.locator(".map-event-options button")).toHaveCount(7);
   await expect(page.locator(".map-preview")).toContainText("Live indie al Biko");
 });
 
@@ -63,7 +69,7 @@ test("Match gives distinct animations for interested and skipped choices", async
   await expect(page.locator(".celebration--pass .celebration__message")).toContainText("Serata passata");
   await expect(page.locator(".celebration__pass-lines i")).toHaveCount(3);
   await expect(page.locator(".celebration__particles")).toHaveCount(0);
-  for (let i = 0; i < 10; i++) await page.getByRole("button", { name: "Passa", exact: true }).click();
+  for (let i = 0; i < 14; i++) await page.getByRole("button", { name: "Passa", exact: true }).click();
   await page.getByRole("button", { name: "Mi interessa", exact: true }).click();
   await expect(page.locator(".match-summary .celebration__message")).toContainText("Serata salvata");
   await page.getByRole("button", { name: "Annulla ultima", exact: true }).click();
@@ -75,6 +81,6 @@ test("detail participation celebrates without pretending to book", async ({ page
   await page.getByRole("button", { name: "Dettagli", exact: true }).click();
   await page.getByRole("button", { name: "Partecipo", exact: true }).click();
   await expect(page.locator(".celebration__message")).toContainText("Ci sei, in modalità demo");
-  await page.getByRole("button", { name: "Partecipi", exact: true }).click();
+  await page.getByRole("button", { name: "Non partecipo più", exact: true }).click();
   await expect(page.locator(".celebration")).toHaveCount(0);
 });
