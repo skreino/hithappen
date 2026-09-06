@@ -1,30 +1,29 @@
 "use client";
-import { useMemo } from "react";
-import { ArrowRight } from "@phosphor-icons/react";
 import { useLocale } from "@/lib/i18n/locale-provider";
+/* eslint-disable @next/next/no-img-element -- Demo photography served from local assets and source CDN. */
+import { useMemo, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, BookmarkSimple, MapPin } from "@phosphor-icons/react";
 import type { EventItem } from "@/data/mock-events";
-import { rankEvents, type Choice, type DeviceAction } from "@/lib/events/device-state";
+import { rankEvents } from "@/lib/events/device-state";
+import { formatRelativeEventTime, isToday } from "@/lib/events/date";
 import { CompactEventRow } from "@/components/events/compact-event-row";
-import { MatchView } from "@/features/match/match-view";
-
-export function DiscoverView({ events, interests, history, saved, onOpen, onAction, onProfile, onExplore, onPersonalize }: {
-  events: EventItem[]; interests: string[]; history: Choice[]; saved: Set<string>;
-  onOpen: (event: EventItem) => void; onAction: (action: DeviceAction) => void;
-  onProfile: () => void; onExplore: () => void; onPersonalize: () => void;
-}) {
-  const { t } = useLocale();
+import { formatPrice } from "@/components/events/event-metadata";
+export function DiscoverView({ events, interests, saved, onOpen, onSave, onExplore }: { events: EventItem[]; interests: string[]; saved: Set<string>; onOpen: (event: EventItem) => void; onSave: (id: string) => void; onExplore: () => void }) {
+  const { t, language } = useLocale();
   const ranked = useMemo(() => rankEvents(events, interests), [events, interests]);
-  const current = ranked.find(event => !history.some(choice => choice.id === event.id));
-  const recommendations = ranked.filter(event => event.id !== current?.id && !history.some(choice => choice.id === event.id)).slice(0, 3);
-  return <main className="view discover-view">
-    <div className="home-heading"><p>{t("ESPLORA LE SERATE")}</p><h1>{t("Il bello è qui vicino.")}</h1><span>{t("Destra è HIT. Sinistra è NOPE. La serata la scegli tu.")}</span></div>
-    <MatchView embedded events={ranked} history={history} saved={saved} ready onOpen={onOpen} onAction={onAction} onProfile={onProfile} />
-    <section className="home-picks" aria-labelledby="recommendations-heading">
-      <div className="section-heading"><h2 id="recommendations-heading">{t("Potrebbero piacerti")}</h2><span>{t("Scelte per te · demo")}</span></div>
-      <p className="recommendation-note">{t(interests.length ? "Dai tuoi interessi, con qualche nuova idea." : "Vicinanza e popolarità demo. Aggiungi i tuoi interessi per affinare le proposte.")}</p>
-      {recommendations.length ? <div className="editorial-list">{recommendations.map(event => <CompactEventRow key={event.id} event={event} onOpen={() => onOpen(event)} />)}</div> : <p className="search-hint">{t("Hai esplorato tutte le proposte. Ritrova i tuoi HIT nei salvati o riapri il catalogo.")}</p>}
-      <button className="personalize-link" onClick={onPersonalize}>{t("Personalizza i tuoi interessi")}<ArrowRight size={16} /></button>
-    </section>
+  const featured = useMemo(() => ranked.filter(event => isToday(event.startAt)).slice(0, 3), [ranked]);
+  const recommendations = ranked.filter(event => !featured.some(item => item.id === event.id)).slice(0, 3);
+  const rail = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const go = (index: number) => {
+    const card = rail.current?.children[index] as HTMLElement | undefined;
+    if (card) rail.current?.scrollTo({ left: card.offsetLeft - (rail.current?.offsetLeft ?? 0), behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  };
+  const reason = (event: EventItem) => event.suggestionReason === "nearby" ? t("Vicino a te") : event.suggestionReason === "popular" ? t("Popolare stasera") : t("In linea con i tuoi interessi");
+  return <main className="view discover-view"><div className="home-heading"><p>{t("STASERA A MILANO")}</p><h1>{t("Il bello è qui vicino.")}</h1></div>
+    <section aria-label={t("Serate in evidenza")} aria-roledescription={t("carosello")}><div className="hero-carousel" ref={rail} onScroll={() => { const first = rail.current?.children[0] as HTMLElement; if (first) setActive(Math.round((rail.current?.scrollLeft ?? 0) / (first.offsetWidth + 12))); }}>{featured.map((event, index) => <article className="night-card" key={event.id} aria-roledescription={t("diapositiva")} aria-label={`${index + 1} ${t("di")} ${featured.length}`}><button className="night-card__open" onClick={() => onOpen(event)}><img src={event.image} alt={t(event.imageAlt ?? event.title)} width="1200" height="900" loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"} /><span className="night-card__copy"><small>{formatRelativeEventTime(event.startAt, undefined, language)}</small><strong>{t(event.title)}</strong><span><MapPin size={15} />{event.neighborhood} · {event.distanceKm.toLocaleString(language === "en" ? "en-GB" : "it-IT")} km</span><b>{formatPrice(event, language)}</b></span></button><button className="card-save" aria-label={`${saved.has(event.id) ? t("Rimuovi") : t("Salva")} ${t(event.title)}`} aria-pressed={saved.has(event.id)} onClick={() => onSave(event.id)}><BookmarkSimple size={22} weight={saved.has(event.id) ? "fill" : "regular"} /></button></article>)}</div>
+    <div className="carousel-controls"><span className="demo-caption">{featured[active] ? reason(featured[active]) : t("Vicinanza e interesse · demo")}</span><div className="carousel-dots">{featured.map((event, index) => <button key={event.id} aria-label={`${t("Mostra serata")} ${index + 1}`} aria-pressed={active === index} onClick={() => go(index)}><i /></button>)}</div><button className="icon-control carousel-arrow" aria-label={t("Serata precedente")} disabled={active === 0} onClick={() => go(active - 1)}><ArrowLeft size={18} /></button><button className="icon-control carousel-arrow" aria-label={t("Serata successiva")} disabled={active >= featured.length - 1} onClick={() => go(active + 1)}><ArrowRight size={18} /></button></div></section>
+    <section className="home-picks"><div className="section-heading"><h2>{t("Altre idee")}</h2><span>{t("Scelte per te · demo")}</span></div><div className="editorial-list">{recommendations.map(event => <CompactEventRow key={event.id} event={event} onOpen={() => onOpen(event)} />)}</div></section>
     <button className="explore-button" onClick={onExplore}>{t("Esplora tutti")}<ArrowRight size={20} /></button>
   </main>;
 }

@@ -12,15 +12,14 @@ async function ready(page: Page) {
 async function tab(page: Page, name: string) {
   await page.getByRole("navigation").getByRole("button",{name,exact:true}).click();
 }
-test("Home swipe, unique recommendations, catalogue and sticky search", async ({page}) => {
+test("Home carousel, unique recommendations, catalogue and sticky search", async ({page}) => {
   await ready(page);
   await expect(page.getByRole("navigation").getByRole("button")).toHaveCount(5);
-  await expect(page.locator(".home-deck .swipe-card")).toHaveCount(1);
+  await expect(page.locator(".night-card")).toHaveCount(3);
   await expect(page.locator(".home-picks .compact-event")).toHaveCount(3);
-  const first = await page.locator(".swipe-card h2").textContent();
-  expect(await page.locator(".home-picks .compact-event strong").allTextContents()).not.toContain(first);
-  await page.getByRole("button",{name:"Passa",exact:true}).click();
-  await expect(page.locator(".swipe-card h2")).not.toHaveText(first!);
+  await page.getByRole("button",{name:"Mostra serata 2",exact:true}).click();
+  await expect(page.getByRole("button",{name:"Mostra serata 2",exact:true})).toHaveAttribute("aria-pressed","true");
+  await expect.poll(() => page.locator(".hero-carousel").evaluate(e=>e.scrollLeft)).toBeGreaterThan(100);
   await page.getByRole("button",{name:"Esplora tutti",exact:true}).click();
   await expect(page.locator(".catalogue-view .compact-event")).toHaveCount(16);
   await page.getByRole("searchbox").fill("biko");

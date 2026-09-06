@@ -2,11 +2,11 @@
 
 Aggiornato: 6 settembre 2026
 
-### Aggiornamento Home swipe-first
+### Home originale e swipe in Match
 
-L'app si apre direttamente su Scopri, anche senza onboarding completato. Il mazzo condiviso con Match mostra una serata per volta: destra/HIT salva, sinistra/NOPE passa. Timbri progressivi seguono il gesto; al rilascio oltre soglia la scheda esce, con fuochino HIT o NOPE animato. Annulla, dettagli e segnalibro restano disponibili; gesti annullati e scroll verticale non registrano scelte. Le conferme rispettano reduced-motion.
+Scopri torna al carosello manuale con tre serate e “Altre idee”. Lo swipe è esclusivo di Match: destra/HIT salva, sinistra/NOPE passa. Restano timbri progressivi, fuochino HIT, NOPE animato, dettagli, segnalibro e annulla. Cronologia e preferiti persistono sul dispositivo dopo il reload; onboarding ripristinato al flusso precedente.
 
-Sotto il mazzo, “Potrebbero piacerti” propone fino a tre eventi non ancora valutati e diversi dalla scheda corrente, ordinati dal ranking locale esistente (interessi, distanza e popolarità demo). Il catalogo completo e i salvati rimangono accessibili anche a mazzo esaurito. La personalizzazione/onboarding è facoltativa. Nessun backend o matching tra persone è aggiunto.
+Il service worker v3 usa la rete per le pagine e la cache HTML solo offline: evita di mostrare vecchie versioni al reload e non restituisce più HTML al posto di JavaScript/CSS in caso di errore. Elimina soltanto le vecchie cache di HitHappen, preservando preferiti e dati locali.
 
 ## Stato implementato — consumer web
 

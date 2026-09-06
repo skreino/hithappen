@@ -17,7 +17,7 @@ Prima di modificare il prodotto, leggi:
 
 ## Principi di prodotto
 
-- Home: swipe HIT/NOPE immediato, condiviso con Match, fino a tre proposte non duplicate sotto il mazzo e accesso al catalogo. Onboarding facoltativo. Ricerca sticky in alto, mai nella tab bar.
+- Home originale: carosello manuale, tre proposte non duplicate e accesso al catalogo. Swipe HIT/NOPE esclusivamente nella sezione Match. Ricerca sticky in alto, mai nella tab bar.
 - La mappa è l'azione centrale e visivamente distinta nella navigazione inferiore.
 - La navigazione inferiore contiene cinque azioni: Scopri, Match, Mappa, Inbox e Profilo; Mappa occupa la posizione centrale.
 - I salvati sono accessibili dal profilo, non dalla navigazione principale.

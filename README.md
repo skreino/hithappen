@@ -10,9 +10,9 @@ Eventi e distanze sono dimostrativi. Onboarding, profilo, preferiti, avanzamento
 
 ## Funzioni presenti
 
-- accesso diretto alla Home anche al primo avvio; onboarding facoltativo da “Personalizza i tuoi interessi” o Profilo;
-- Home con swipe destra HIT (fuochino animato e salvataggio), sinistra NOPE, pulsanti equivalenti, dettagli e annulla; cronologia condivisa con Match;
-- sezione “Potrebbero piacerti” sotto il mazzo: fino a tre proposte ordinate con interessi e punteggi demo, senza duplicare la scheda corrente o le scelte già effettuate;
+- onboarding saltatile con interessi, consenso posizione e fallback Milano/Monza;
+- Home originale con carosello manuale, tre proposte e sezione “Altre idee”;
+- swipe esclusivamente in Match: destra HIT con fuochino animato e salvataggio, sinistra NOPE, dettagli e annulla;
 - dettaglio evento con prezzo, distanza e partecipanti;
 - eventi salvati;
 - Match personale con swipe, pulsanti equivalenti, dettagli, annulla e riepilogo;
@@ -21,7 +21,7 @@ Eventi e distanze sono dimostrativi. Onboarding, profilo, preferiti, avanzamento
 - Inbox locale con gruppi evento, una conversazione demo preesistente e messaggi persistenti sul dispositivo;
 - profilo demo modificabile con preferiti, privacy e preferenze notifiche locali;
 - mappa Leaflet/OpenStreetMap con clustering Milano/Monza, marker, lista e anteprima sincronizzate, zoom e gestione errori;
-- PWA installabile con manifest e service worker versionato;
+- PWA installabile: pagine aggiornate dalla rete, cache HTML solo come fallback offline e cache delle risorse statiche separata;
 - tema dark-first coerente con il mondo nightlife;
 - navigazione mobile a cinque azioni con Mappa centrale.
 
@@ -29,7 +29,7 @@ Eventi e distanze sono dimostrativi. Onboarding, profilo, preferiti, avanzamento
 
 Direzione iOS-inspired adattata alla preferenza di sistema. Di giorno: bianco caldo `#FFF7F6`, superfici bianche, testo bordeaux e rosso `#C32F27` come unico accento. Di notte resta la palette approvata: base `#1C1013`, pannelli `#342327`, testo `#FAF5F1` e oro `#F7B538` per le azioni. Font di sistema: SF su Apple, fallback sugli altri dispositivi. Wordmark conservato, vetro limitato a testate e navigazione. Cinque voci: Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena. Ricerca solo nella testata sticky.
 
-Sfondo ambientale statico adattato a giorno e notte. Il fuochino è riservato all'azione HIT: timbro durante il trascinamento, uscita della carta e conferma animata; NOPE ha un timbro e una breve oscillazione laterale. Home e Match usano lo stesso componente. Le scelte rimangono personali, non sono abbinamenti tra persone. Con `prefers-reduced-motion` rimane la conferma testuale, senza uscita animata, fuoco o coriandoli. Nessuna nuova dipendenza.
+Sfondo ambientale statico adattato a giorno e notte. Il fuochino è riservato all'azione HIT: timbro durante il trascinamento, uscita della carta e conferma animata; NOPE ha un timbro e una breve oscillazione laterale. Le animazioni HIT/NOPE compaiono esclusivamente in Match. Le scelte rimangono personali, non sono abbinamenti tra persone. Con `prefers-reduced-motion` rimane la conferma testuale, senza uscita animata, fuoco o coriandoli. Nessuna nuova dipendenza.
 
 Italiano e inglese sono selezionabili dalla testata (EN/IT) e dal Profilo. Interfaccia, eventi demo, ricerca, date e messaggi si adattano alla lingua. La preferenza è validata e salvata in `hithappen:language:v1`, separatamente dai preferiti; se lo storage non è disponibile il cambio funziona per la sessione. La mappa conserva l’anteprima selezionata; la precedente fila di schede è sostituita da una lista richiudibile, utilizzabile anche senza cartografia.
 
