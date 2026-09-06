@@ -2,6 +2,14 @@ export type Language = "it" | "en";
 
 // Italian source strings are stable keys. Proper venue and neighbourhood names stay unchanged.
 export const english: Record<string, string> = {
+  "ESPLORA LE SERATE": "EXPLORE THE NIGHT",
+  "Destra è HIT. Sinistra è NOPE. La serata la scegli tu.": "Right is HIT. Left is NOPE. Your night, your choice.",
+  "UNA SERATA ALLA VOLTA": "ONE NIGHT AT A TIME",
+  "Potrebbero piacerti": "You might like",
+  "Dai tuoi interessi, con qualche nuova idea.": "Based on your interests, with a few fresh ideas.",
+  "Vicinanza e popolarità demo. Aggiungi i tuoi interessi per affinare le proposte.": "Demo distance and popularity. Add your interests to refine suggestions.",
+  "Hai esplorato tutte le proposte. Ritrova i tuoi HIT nei salvati o riapri il catalogo.": "You've explored every suggestion. Find your HITs in saved events or reopen the catalogue.",
+  "Personalizza i tuoi interessi": "Personalize your interests",
   "Monza": "Monza",
   "Benvenuto in HitHappen": "Welcome to HitHappen",
   "La serata giusta, senza perderci la serata.": "The right night, without wasting the night.",

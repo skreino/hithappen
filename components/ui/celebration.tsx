@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, type CSSProperties } from "react";
-import { Check, X } from "@phosphor-icons/react";
+import { Check, Fire, X } from "@phosphor-icons/react";
 import { useLocale } from "@/lib/i18n/locale-provider";
 
 // Deterministic particles avoid hydration differences and random work per render.
@@ -19,7 +19,8 @@ export function Celebration({ title, participation = false, kind = "like" }: { t
     return () => window.clearTimeout(timer);
   }, [kind]);
   if (!visible) return null;
-  return <div className={`celebration celebration--${kind}`}>
+  return <div className={`celebration celebration--${kind}${participation ? "" : " celebration--swipe"}`}>
+    {!participation && <div className={`choice-flash choice-flash--${kind}`} aria-hidden="true">{kind === "like" && <Fire weight="fill" />}<b>{kind === "like" ? "HIT" : "NOPE"}</b></div>}
     {kind === "like" ? <div className="celebration__particles" aria-hidden="true">{particles.map((style, index) => <i key={index} style={style} />)}</div> : null}
     <div className="celebration__message" role="status" aria-live="polite">{kind === "pass" ? <span className="celebration__pass-lines" aria-hidden="true">{[-8, 0, 8].map((offset, index) => <i key={offset} style={{ "--offset": `${offset}px`, "--delay": `${index * 45}ms` } as CSSProperties} />)}</span> : null}<span className="celebration__check">{kind === "pass" ? <X size={22} weight="bold" /> : <Check size={22} weight="bold" />}</span><span><strong>{t(kind === "pass" ? "Serata passata" : participation ? "Ci sei, in modalità demo" : "Serata salvata")}</strong><small>{t(title)}</small></span></div>
   </div>;

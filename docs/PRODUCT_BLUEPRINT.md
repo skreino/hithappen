@@ -1,6 +1,12 @@
 # HitHappen — Product Blueprint v0.1
 
-Aggiornato: 3 settembre 2026
+Aggiornato: 6 settembre 2026
+
+### Aggiornamento Home swipe-first
+
+L'app si apre direttamente su Scopri, anche senza onboarding completato. Il mazzo condiviso con Match mostra una serata per volta: destra/HIT salva, sinistra/NOPE passa. Timbri progressivi seguono il gesto; al rilascio oltre soglia la scheda esce, con fuochino HIT o NOPE animato. Annulla, dettagli e segnalibro restano disponibili; gesti annullati e scroll verticale non registrano scelte. Le conferme rispettano reduced-motion.
+
+Sotto il mazzo, “Potrebbero piacerti” propone fino a tre eventi non ancora valutati e diversi dalla scheda corrente, ordinati dal ranking locale esistente (interessi, distanza e popolarità demo). Il catalogo completo e i salvati rimangono accessibili anche a mazzo esaurito. La personalizzazione/onboarding è facoltativa. Nessun backend o matching tra persone è aggiunto.
 
 ## Stato implementato — consumer web
 

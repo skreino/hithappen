@@ -35,10 +35,14 @@ export function HitHappenApp() {
   const [filters, setFilters] = useState<EventFilters>(defaultFilters);
   const [overlay, setOverlay] = useState<"search" | "filters" | null>(null);
   const [query, setQuery] = useState("");
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const filteredEvents = useMemo(() => filterEvents(events, filters), [events, filters]);
   const results = useMemo(() => searchEvents(filteredEvents, query, language), [filteredEvents, query, language]);
   const saved = useMemo(() => new Set(device.saved), [device.saved]);
-  const dispatch = (action: DeviceAction) => setDevice(current => deviceReducer(current, action));
+  const dispatch = (action: DeviceAction) => {
+    if (action.type === "reopen-onboarding") setShowOnboarding(true);
+    setDevice(current => deviceReducer(current, action));
+  };
 
   useEffect(() => {
     let active = true;
@@ -59,10 +63,10 @@ export function HitHappenApp() {
 
   const openEvent = (event: EventItem) => { window.scrollTo({ top: 0 }); setSelectedEvent(event); setOverlay(null); };
   const switchTab = (next: AppTab) => { setTab(next); setCatalogue(false); setQuery(""); setSelectedEvent(null); setOverlay(null); window.scrollTo({ top: 0 }); };
-  const completeOnboarding = (city: City, interests: string[], locationConsent: LocationConsent) => dispatch({ type: "complete-onboarding", profile: { city, interests }, locationConsent });
+  const completeOnboarding = (city: City, interests: string[], locationConsent: LocationConsent) => { dispatch({ type: "complete-onboarding", profile: { city, interests }, locationConsent }); setShowOnboarding(false); };
 
   if (!hydrated) return <div className="app-shell" data-ready="false"><ViewSkeleton /></div>;
-  if (!device.onboarding.completed) return <div className="app-shell" data-ready="true"><OnboardingFlow onComplete={completeOnboarding} /></div>;
+  if (showOnboarding) return <div className="app-shell" data-ready="true"><OnboardingFlow onComplete={completeOnboarding} /></div>;
   if (selectedEvent) {
     const attending = device.attendance.some(item => item.eventId === selectedEvent.id);
     const inGroup = device.groups.some(item => item.eventId === selectedEvent.id);
@@ -72,7 +76,7 @@ export function HitHappenApp() {
     <AppHeader fullSearch={tab === "discover"} query={query} city={device.profile.city} onQuery={value => { setQuery(value); if (value) setCatalogue(true); }} onSearch={() => setOverlay("search")} onBack={tab === "discover" && catalogue ? () => { setCatalogue(false); setQuery(""); } : undefined} />
     {storageMessage && <p className="storage-message" role="status">{t(storageMessage)}</p>}
     <Suspense fallback={<ViewSkeleton />}>
-      {tab === "discover" && (catalogue ? <main className="view catalogue-view"><div className="section-heading"><h1>{t("Tutti gli eventi")}</h1><button onClick={() => setOverlay("filters")}><SlidersHorizontal size={20} />{t("Filtri")}</button></div><p className="results-count" role="status">{results.length} {t("eventi · dati demo")}</p>{results.length ? <div className="editorial-list">{results.map(event => <CompactEventRow key={event.id} event={event} onOpen={() => openEvent(event)} />)}</div> : <div className="empty-copy"><h2>{t("Nessun evento trovato")}</h2><p>{t("Cambia ricerca o allarga i filtri.")}</p><button className="secondary-cta" onClick={() => { setFilters(defaultFilters); setQuery(""); }}>{t("Azzera ricerca e filtri")}</button></div>}</main> : <DiscoverView events={events} interests={device.profile.interests} saved={saved} onOpen={openEvent} onSave={id => dispatch({ type: "save", id })} onExplore={() => { setCatalogue(true); window.scrollTo({ top: 0 }); }} />)}
+      {tab === "discover" && (catalogue ? <main className="view catalogue-view"><div className="section-heading"><h1>{t("Tutti gli eventi")}</h1><button onClick={() => setOverlay("filters")}><SlidersHorizontal size={20} />{t("Filtri")}</button></div><p className="results-count" role="status">{results.length} {t("eventi · dati demo")}</p>{results.length ? <div className="editorial-list">{results.map(event => <CompactEventRow key={event.id} event={event} onOpen={() => openEvent(event)} />)}</div> : <div className="empty-copy"><h2>{t("Nessun evento trovato")}</h2><p>{t("Cambia ricerca o allarga i filtri.")}</p><button className="secondary-cta" onClick={() => { setFilters(defaultFilters); setQuery(""); }}>{t("Azzera ricerca e filtri")}</button></div>}</main> : <DiscoverView events={events} interests={device.profile.interests} history={device.history} saved={saved} onOpen={openEvent} onAction={dispatch} onProfile={() => switchTab("profile")} onPersonalize={() => setShowOnboarding(true)} onExplore={() => { setCatalogue(true); window.scrollTo({ top: 0 }); }} />)}
       {tab === "match" && <MatchView events={events} history={device.history} saved={saved} ready onOpen={openEvent} onAction={dispatch} onProfile={() => switchTab("profile")} />}
       {tab === "map" && mapSelection && <MapView events={filteredEvents} selected={mapSelection} onSelect={setMapSelection} onOpen={openEvent} onFilters={() => setOverlay("filters")} />}
       {tab === "inbox" && <InboxView events={events} state={device} onAction={dispatch} />}

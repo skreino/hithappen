@@ -2,6 +2,8 @@ import { expect, test } from "@playwright/test";
 
 test("onboarding supports manual city and interest selection", async ({ page }) => {
   await page.goto("/");
+  await expect(page.locator(".home-deck .swipe-card")).toBeVisible();
+  await page.getByRole("button", { name: "Personalizza i tuoi interessi" }).click();
   await expect(page.getByRole("heading", { name: "La serata giusta, senza perderci la serata." })).toBeVisible();
   await page.getByRole("button", { name: "Continua" }).click();
   await page.getByRole("button", { name: "Continua" }).click();

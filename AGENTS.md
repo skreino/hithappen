@@ -17,13 +17,13 @@ Prima di modificare il prodotto, leggi:
 
 ## Principi di prodotto
 
-- Home: carosello manuale, tre proposte non duplicate e accesso al catalogo. Ricerca sticky in alto, mai nella tab bar.
+- Home: swipe HIT/NOPE immediato, condiviso con Match, fino a tre proposte non duplicate sotto il mazzo e accesso al catalogo. Onboarding facoltativo. Ricerca sticky in alto, mai nella tab bar.
 - La mappa è l'azione centrale e visivamente distinta nella navigazione inferiore.
 - La navigazione inferiore contiene cinque azioni: Scopri, Match, Mappa, Inbox e Profilo; Mappa occupa la posizione centrale.
 - I salvati sono accessibili dal profilo, non dalla navigazione principale.
 - La sezione giochi deve aiutare a scegliere una serata; non deve sembrare un'app di dating.
 - La selezione corrente usa vicinanza e interesse ricevuto demo; non dichiarare un algoritmo personalizzato reale.
-- Tema automatico di sistema: giorno bianco caldo/rosso, notte con la palette bordeaux/oro approvata. Luce ambientale statica, senza fiamme. Festa sulle scelte positive e feedback X sugli skip, rispettando reduced-motion. Match personale, preferiti e lingua persistono sul dispositivo; non creare chat o abbinamenti simulati.
+- Tema automatico di sistema: giorno bianco caldo/rosso, notte con la palette bordeaux/oro approvata. Luce ambientale statica. Fuochino animato HIT sulle scelte positive e NOPE animato sugli skip, rispettando reduced-motion. Match personale, preferiti e lingua persistono sul dispositivo; non creare nuovi abbinamenti simulati.
 - Solo locali verificati potranno pubblicare eventi reali.
 - La chat evento è riservata ai partecipanti e dovrà includere blocco, segnalazione e moderazione.
 - Mantenere i due temi automatici approvati: giorno bianco caldo/rosso e notte bordeaux/oro, con identica gerarchia.
