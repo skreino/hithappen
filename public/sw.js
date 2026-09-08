@@ -1,5 +1,5 @@
-const CACHE = "hithappen-shell-v3";
-const SHELL = ["/", "/manifest.webmanifest", "/branding/logo.png", "/branding/wordmark-transparent.png", "/events/rooftop.png", "/events/live.png", "/events/club.png"];
+const CACHE = "hithappen-shell-v4";
+const SHELL = ["/", "/manifest.webmanifest", "/branding/logo.png", "/branding/wordmark-transparent.png", "/events/rooftop-v2.webp", "/events/panorama-v2.webp", "/events/cinema-v2.webp"];
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith("hithappen-shell-") && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", event => {

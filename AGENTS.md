@@ -17,16 +17,16 @@ Prima di modificare il prodotto, leggi:
 
 ## Principi di prodotto
 
-- Home originale: carosello manuale, tre proposte non duplicate e accesso al catalogo. Swipe HIT/NOPE esclusivamente nella sezione Match. Ricerca sticky in alto, mai nella tab bar.
+- Home editoriale: carosello manuale con due schede completamente visibili alla volta, tre proposte non duplicate e accesso al catalogo. Swipe HIT/NOPE esclusivamente nella sezione Match. Ricerca sticky in alto, mai nella tab bar.
 - La mappa è l'azione centrale e visivamente distinta nella navigazione inferiore.
 - La navigazione inferiore contiene cinque azioni: Scopri, Match, Mappa, Inbox e Profilo; Mappa occupa la posizione centrale.
 - I salvati sono accessibili dal profilo, non dalla navigazione principale.
 - La sezione giochi deve aiutare a scegliere una serata; non deve sembrare un'app di dating.
 - La selezione corrente usa vicinanza e interesse ricevuto demo; non dichiarare un algoritmo personalizzato reale.
-- Tema automatico di sistema: giorno bianco caldo/rosso, notte con la palette bordeaux/oro approvata. Luce ambientale statica. Fuochino animato HIT sulle scelte positive e NOPE animato sugli skip, rispettando reduced-motion. Match personale, preferiti e lingua persistono sul dispositivo; non creare nuovi abbinamenti simulati.
+- Tema scuro predefinito: nero #101112, grigi neutri, Inter Tight e fotografie protagoniste. Tema chiaro selezionabile nel Profilo e persistente. Piccoli accenti rosa–lilla–azzurro su HIT e Mappa. Animazioni brevi HIT/NOPE rispettano reduced-motion; nessuna animazione ambientale. Match personale, preferiti e lingua persistono sul dispositivo; non creare nuovi abbinamenti simulati.
 - Solo locali verificati potranno pubblicare eventi reali.
 - La chat evento è riservata ai partecipanti e dovrà includere blocco, segnalazione e moderazione.
-- Mantenere i due temi automatici approvati: giorno bianco caldo/rosso e notte bordeaux/oro, con identica gerarchia.
+- Match leggero: foto singola, metadati fuori dalla foto, Dettagli terziario e NOPE/HIT separati dalla navigazione. Non reintrodurre pile di carte o contatori social decorativi.
 - L'area iniziale è Milano e Monza Brianza.
 
 ## Regole tecniche

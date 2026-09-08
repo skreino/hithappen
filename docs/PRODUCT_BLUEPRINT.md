@@ -1,12 +1,12 @@
 # HitHappen — Product Blueprint v0.1
 
-Aggiornato: 6 settembre 2026
+Aggiornato: 8 settembre 2026
 
-### Home originale e swipe in Match
+### Home editoriale e Match leggero
 
-Scopri torna al carosello manuale con tre serate e “Altre idee”. Lo swipe è esclusivo di Match: destra/HIT salva, sinistra/NOPE passa. Restano timbri progressivi, fuochino HIT, NOPE animato, dettagli, segnalibro e annulla. Cronologia e preferiti persistono sul dispositivo dopo il reload; onboarding ripristinato al flusso precedente.
+Scopri mostra due schede fotografiche completamente visibili alla volta, tre serate nel carosello manuale e “Altre idee” con righe senza pannelli. Match separa foto e informazioni, con Dettagli terziario e NOPE/HIT distinti dalla barra inferiore. Lo swipe è esclusivo di Match: destra/HIT salva, sinistra/NOPE passa. Restano timbri progressivi, fuochino HIT, NOPE animato, dettagli, segnalibro e annulla. Cronologia e preferiti persistono sul dispositivo dopo il reload; onboarding ripristinato al flusso precedente.
 
-Il service worker v3 usa la rete per le pagine e la cache HTML solo offline: evita di mostrare vecchie versioni al reload e non restituisce più HTML al posto di JavaScript/CSS in caso di errore. Elimina soltanto le vecchie cache di HitHappen, preservando preferiti e dati locali.
+Il service worker v4 usa la rete per le pagine e la cache HTML solo offline: evita di mostrare vecchie versioni al reload e non restituisce più HTML al posto di JavaScript/CSS in caso di errore. Elimina soltanto le vecchie cache di HitHappen, preservando preferiti e dati locali.
 
 ## Stato implementato — consumer web
 
@@ -91,14 +91,14 @@ Può inoltre mostrare titolo, luogo, data e orario in forma compatta.
 
 ### Direzione visiva consumer
 
-- Stile iOS-inspired web adattato a `prefers-color-scheme`: giorno bianco caldo, superfici bianche, testo bordeaux e rosso `#C32F27`; notte con fondo `#1C1013`, pannelli `#342327`, testo `#FAF5F1` e oro `#F7B538`.
-- Sfondo ambientale statico adattivo senza fiamme. Fotografie e mappa non vengono tinte. Coriandoli sulle scelte positive e feedback X con scia sugli skip; solo conferma testuale con reduced-motion, nessun abbinamento online simulato.
+- Stile editoriale fotografico: scuro predefinito #101112, testo bianco caldo e grigi neutri. Tema chiaro selezionabile dal Profilo, persistito in `hithappen:theme:v1`; non segue automaticamente il sistema.
+- Sfondo neutro senza movimento continuo. Fotografie e mappa non vengono tinte. Coriandoli sulle scelte positive e feedback X con scia sugli skip; solo conferma testuale con reduced-motion, nessun abbinamento online simulato.
 - Lingua italiano/inglese dalla testata e dal Profilo, persistita sul dispositivo in `hithappen:language:v1`. Tradotti UI, eventi demo, ricerca, date ed errori; identificatori e categorie di dominio restano stabili.
 - Mappa senza fila orizzontale di schede: anteprima selezionata e lista richiudibile di fallback, sincronizzate con i marker.
-- System sans, SF sui dispositivi Apple; wordmark invariato.
-- Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena oro.
+- Inter Tight; wordmark invariato. Foto demo illustrative diverse per ciascun evento, locali e compresse in WebP.
+- Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale con piccolo accento rosa–lilla–azzurro, non un pulsante oro.
 - Ricerca esclusivamente nella testata sticky. Catalogo separato dalla Home.
-- Superfici contenuto opache, vetro solo per testate e navigazione; nessun pannello promozionale desktop.
+- Metadati Match fuori dalla foto; nessuna pila di carte o contatore sociale decorativo. Vetro solo per testata e navigazione.
 - Touch target dei controlli almeno 44 px, safe area, focus visibile e reduced-motion.
 
 ### Dettaglio evento

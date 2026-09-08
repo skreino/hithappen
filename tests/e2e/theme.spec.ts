@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("hithappen:personal:v2", JSON.stringify({ version: 2, saved: ["biko-live"], history: [], onboarding: { completed: true, step: 3, locationConsent: "unknown" } })));
 });
 
-test("day theme is bright red and warm white without background motion", async ({ page }) => {
+test("dark is the default even with a light OS preference, without ambient motion", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/");
   const backdrop = page.locator(".ambient-backdrop");
@@ -12,18 +12,26 @@ test("day theme is bright red and warm white without background motion", async (
   await expect(backdrop).toHaveCSS("pointer-events", "none");
   await expect(backdrop).toHaveCSS("animation-name", "none");
   await expect(page.locator(".flame-backdrop")).toHaveCount(0);
-  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(255, 248, 244)");
-  await expect(page.getByRole("button", { name: "Esplora tutti", exact: true })).toHaveCSS("background-color", "rgb(195, 47, 39)");
+  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(16, 17, 18)");
+  await expect(page.getByRole("button", { name: "Esplora tutti", exact: true })).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
   await page.getByRole("button", { name: "Match", exact: true }).click();
   await page.getByRole("button", { name: "Dettagli", exact: true }).click();
   await expect(backdrop).toBeVisible();
 });
 
-test("night theme keeps the established burgundy and gold palette", async ({ page }) => {
+test("light appearance can be selected in Profile and survives reload", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/");
-  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(23, 13, 16)");
-  await expect(page.getByRole("button", { name: "Esplora tutti", exact: true })).toHaveCSS("background-color", "rgb(247, 181, 56)");
+  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(16, 17, 18)");
+  await page.getByRole("button", { name: "Profilo", exact: true }).click();
+  await page.getByRole("button", { name: "Chiaro", exact: true }).click();
+  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(245, 245, 243)");
+  await page.reload();
+  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(245, 245, 243)");
+  await page.getByRole("button", { name: "Profilo", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Chiaro", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Scuro", exact: true }).click();
+  await expect(page.locator("html")).toHaveCSS("background-color", "rgb(16, 17, 18)");
 });
 
 test("celebration respects reduced motion and disappears", async ({ page }) => {

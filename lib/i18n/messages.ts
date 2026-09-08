@@ -2,6 +2,11 @@ export type Language = "it" | "en";
 
 // Italian source strings are stable keys. Proper venue and neighbourhood names stay unchanged.
 export const english: Record<string, string> = {
+  "La notte è ancora tua.": "The night is still yours.",
+  "Scopri una serata alla volta.": "Discover one night at a time.",
+  "Aspetto": "Appearance",
+  "Scuro": "Dark",
+  "Chiaro": "Light",
   "ESPLORA LE SERATE": "EXPLORE THE NIGHT",
   "Destra è HIT. Sinistra è NOPE. La serata la scegli tu.": "Right is HIT. Left is NOPE. Your night, your choice.",
   "UNA SERATA ALLA VOLTA": "ONE NIGHT AT A TIME",

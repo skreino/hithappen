@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-test("Home stays original; animated HIT and NOPE are exclusive to Match and survive reload", async ({ page }) => {
+test("Home stays editorial; animated HIT and NOPE are exclusive to Match and survive reload", async ({ page }) => {
   await expect(page.locator(".night-card")).toHaveCount(3);
   await expect(page.locator(".swipe-card")).toHaveCount(0);
   await page.getByRole("button", { name: "Match", exact: true }).click();
@@ -34,7 +34,7 @@ test("reload fetches current Home even when the service worker has an obsolete c
   await page.evaluate(async () => { await navigator.serviceWorker.ready; });
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
   await page.evaluate(async () => {
-    const cache = await caches.open("hithappen-shell-v3");
+    const cache = await caches.open("hithappen-shell-v4");
     await cache.put("/", new Response("<html><body>OLD VERSION</body></html>", { headers: { "Content-Type": "text/html" } }));
   });
   await page.reload();

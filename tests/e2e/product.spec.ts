@@ -108,6 +108,7 @@ test("navigation touch targets and page bounds at all sizes", async ({page}, inf
   await ready(page);
   for(const name of ["Scopri","Match","Mappa","Inbox","Profilo"]) {
     await tab(page,name);
+    await expect(page.locator(".view-skeleton")).toHaveCount(0);
     const dimensions=await page.getByRole("navigation").getByRole("button").evaluateAll(es=>es.map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})));
     expect(dimensions.every(d=>d.w>=44 && d.h>=44)).toBeTruthy();
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
@@ -123,6 +124,6 @@ test("navigation touch targets and page bounds at all sizes", async ({page}, inf
       const nav=(await page.getByRole("navigation").boundingBox())!;
       expect(preview.y+preview.height).toBeLessThanOrEqual(nav.y);
     }
-    await page.screenshot({path:info.outputPath(name+".png"),fullPage:true});
+    await page.screenshot({path:info.outputPath(name+".png"),fullPage:true,animations:"disabled"});
   }
 });

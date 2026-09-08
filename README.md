@@ -11,7 +11,7 @@ Eventi e distanze sono dimostrativi. Onboarding, profilo, preferiti, avanzamento
 ## Funzioni presenti
 
 - onboarding saltatile con interessi, consenso posizione e fallback Milano/Monza;
-- Home originale con carosello manuale, tre proposte e sezione “Altre idee”;
+- Home editoriale con due schede affiancate, tre proposte nel carosello manuale e sezione “Altre idee”;
 - swipe esclusivamente in Match: destra HIT con fuochino animato e salvataggio, sinistra NOPE, dettagli e annulla;
 - dettaglio evento con prezzo, distanza e partecipanti;
 - eventi salvati;
@@ -27,13 +27,15 @@ Eventi e distanze sono dimostrativi. Onboarding, profilo, preferiti, avanzamento
 
 ## Direzione visiva
 
-Direzione iOS-inspired adattata alla preferenza di sistema. Di giorno: bianco caldo `#FFF7F6`, superfici bianche, testo bordeaux e rosso `#C32F27` come unico accento. Di notte resta la palette approvata: base `#1C1013`, pannelli `#342327`, testo `#FAF5F1` e oro `#F7B538` per le azioni. Font di sistema: SF su Apple, fallback sugli altri dispositivi. Wordmark conservato, vetro limitato a testate e navigazione. Cinque voci: Scopri, Match, Mappa, Inbox, Profilo; Mappa centrale piena. Ricerca solo nella testata sticky.
+Design editoriale fotografico: quasi nero `#101112`, bianco caldo, grigi neutri e Inter Tight. Scuro predefinito; variante chiara dal Profilo, persistita in `hithappen:theme:v1`. Wordmark conservato, vetro limitato a testata e navigazione. Scopri, Match, Mappa, Inbox, Profilo: Mappa centrale con piccolo accento rosa–lilla–azzurro. Home senza swipe; Match con metadati sotto la foto, Dettagli discreto e due pulsanti NOPE/HIT. Le altre sezioni conservano struttura e funzionalità.
 
-Sfondo ambientale statico adattato a giorno e notte. Il fuochino è riservato all'azione HIT: timbro durante il trascinamento, uscita della carta e conferma animata; NOPE ha un timbro e una breve oscillazione laterale. Le animazioni HIT/NOPE compaiono esclusivamente in Match. Le scelte rimangono personali, non sono abbinamenti tra persone. Con `prefers-reduced-motion` rimane la conferma testuale, senza uscita animata, fuoco o coriandoli. Nessuna nuova dipendenza.
+Sfondo neutro senza animazione ambientale. Il fuochino è riservato all'azione HIT: timbro durante il trascinamento, uscita della carta e conferma animata; NOPE ha un timbro e una breve oscillazione laterale. Le animazioni HIT/NOPE compaiono esclusivamente in Match. Le scelte rimangono personali, non sono abbinamenti tra persone. Con `prefers-reduced-motion` rimane la conferma testuale, senza uscita animata, fuoco o coriandoli. Nessuna nuova dipendenza.
 
 Italiano e inglese sono selezionabili dalla testata (EN/IT) e dal Profilo. Interfaccia, eventi demo, ricerca, date e messaggi si adattano alla lingua. La preferenza è validata e salvata in `hithappen:language:v1`, separatamente dai preferiti; se lo storage non è disponibile il cambio funziona per la sessione. La mappa conserva l’anteprima selezionata; la precedente fila di schede è sostituita da una lista richiudibile, utilizzabile anche senza cartografia.
 
 ## Avvio locale
+
+Le foto sono illustrative e non documentano i locali demo. Provenienza, prompt e file ottimizzati: [fotografie editoriali](docs/EDITORIAL_ASSETS.md).
 
 Requisiti:
 
@@ -76,7 +78,7 @@ npm run build
 
 ## Direzione tecnica
 
-Il prototipo attuale usa React, TypeScript e Vinext. La futura applicazione mobile completa è prevista con Expo/React Native e Supabase, dopo la validazione del prodotto.
+Il prototipo attuale usa React, TypeScript e Next.js (con anteprima Vinext/Vite separata). La futura applicazione mobile completa è prevista con Expo/React Native e Supabase, dopo la validazione del prodotto.
 
 ## Codex
 

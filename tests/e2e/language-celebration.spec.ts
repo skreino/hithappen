@@ -17,7 +17,7 @@ test("English covers search, filters and profile, persists, and keeps Match choi
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("heading", { name: "Indie live at Biko", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Discover", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Good times, close by." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "The night is still yours." })).toBeVisible();
   await page.getByRole("button", { name: "Explore all", exact: true }).click();
   await page.getByRole("searchbox").fill("vinyl");
   await expect(page.locator(".catalogue-view .compact-event")).toHaveCount(1);

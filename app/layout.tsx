@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { AmbientBackdrop } from "@/components/ui/ambient-backdrop";
 import { LocaleProvider } from "@/lib/i18n/locale-provider";
+import { AppearanceProvider } from "@/components/ui/theme-preference";
+import "@fontsource-variable/inter-tight";
 import { ServiceWorkerRegistration } from "@/components/pwa/service-worker-registration";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
@@ -16,12 +18,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: "light dark",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fff7f6" },
-    { media: "(prefers-color-scheme: dark)", color: "#1c1013" },
-  ],
+  themeColor: "#101112",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="it"><body><AmbientBackdrop /><LocaleProvider>{children}<ServiceWorkerRegistration /></LocaleProvider></body></html>;
+  return <html lang="it" suppressHydrationWarning><body><AppearanceProvider><AmbientBackdrop /><LocaleProvider>{children}<ServiceWorkerRegistration /></LocaleProvider></AppearanceProvider></body></html>;
 }

@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Scegli cosa fare stasera a Milano e Monza.",
     start_url: "/",
     display: "standalone",
-    background_color: "#fff8f4",
-    theme_color: "#c32f27",
+    background_color: "#101112",
+    theme_color: "#101112",
     orientation: "portrait",
     icons: [{ src: "/branding/logo.png", sizes: "any", type: "image/png", purpose: "maskable" }],
   };

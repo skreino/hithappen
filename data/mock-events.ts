@@ -50,7 +50,18 @@ export const mockEvents: EventItem[] = [
   { id:"monza-track", title:"After race social club", venue:"Autodromo Nazionale", category:"Club", description:"DJ set, visual e area social dopo una giornata nel parco di Monza.", image:image("monza-track"), startAt:createRelativeDate(nextWeekendFriday + 2,18,30), endAt:createRelativeDate(nextWeekendFriday + 2,23,0), latitude:45.6206, longitude:9.2811, neighborhood:"Autodromo", city:"Monza", distanceKm:17.1, price:20, currency:"EUR", attendeeCount:56, isFeatured:false, tags:["DJ set","Sociale"] },
 ];
 
+// Each demo event has its own editorial image; event data and ordering stay intact.
+const editorialImages: Record<string, string> = {
+  "rooftop-navigli": "rooftop-v2", "biko-live": "live-v2", "isola-bar": "vinyl-v2",
+  "porta-venezia-club": "panorama-v2", "domani-social-dinner": "dinner-v2",
+  "domani-elettronica": "electronics-v2", "domani-outdoor": "cinema-v2",
+  "weekend-gallery": "gallery-v2", "weekend-jazz": "jazz-v2",
+  "weekend-brunch": "brunch-v2", "weekend-darsena": "walk-v2",
+  "next-week-disco": "disco-v2", "monza-corte": "acoustic-v2",
+  "monza-aperitivo": "garden-v2", "monza-villa": "villa-cinema-v2", "monza-track": "after-race-v2",
+};
 for (const event of mockEvents) {
+  if (editorialImages[event.id]) event.image = `/events/${editorialImages[event.id]}.webp`;
   event.imageAlt ??= `${event.title} a ${event.venue}`;
   event.suggestionReason ??= event.distanceKm <= 2 ? "nearby" : event.attendeeCount >= 40 ? "popular" : "interest";
   event.ticketStatus ??= "unavailable-demo";
